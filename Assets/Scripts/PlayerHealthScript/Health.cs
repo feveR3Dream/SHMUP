@@ -28,13 +28,12 @@ public class Health : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Bullet"))
+        if (collision.gameObject.CompareTag("Bullets") || collision.gameObject.CompareTag("Obstacles"))
         {
             dead = true;
             GameObject deadEffect = Instantiate(deathEffect, transform.position, Quaternion.identity);
             Destroy(deadEffect, 2f);
             player.gameObject.SetActive(false);
         }
-
     }
 }

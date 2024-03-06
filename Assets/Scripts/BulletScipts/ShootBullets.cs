@@ -62,7 +62,6 @@ public class ShootBullets : MonoBehaviour
         }
         if (evolutionCounter == 2) // Work
         {
-            Debug.Log("Working");
             evoStageOne = false;
             evoStageTwo = true;
             evoStageThree = false;
@@ -77,7 +76,7 @@ public class ShootBullets : MonoBehaviour
             evoStageFour = false;
             evoStageFive = false;
         }
-        if (evolutionCounter == 4)
+        if (evolutionCounter == 4) // Work
         {
             evoStageOne = false;
             evoStageTwo = false;
@@ -85,7 +84,7 @@ public class ShootBullets : MonoBehaviour
             evoStageFour = true;
             evoStageFive = false;
         }
-        if (evolutionCounter == 5)
+        if (evolutionCounter == 5) // Work
         {
             evoStageOne = false;
             evoStageTwo = false;
