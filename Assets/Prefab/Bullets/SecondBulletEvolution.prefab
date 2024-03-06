@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5935518992158724844}
   - component: {fileID: 45528150139684823}
   m_Layer: 3
-  m_Name: 'BulletFirstEvo '
+  m_Name: SecondBulletEvolution
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

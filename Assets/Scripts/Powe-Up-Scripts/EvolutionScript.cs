@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,13 +12,6 @@ public class EvolutionScript : MonoBehaviour
     [SerializeField] float maxSizeY;
     [SerializeField] float minSizeX = 0.33f;
     [SerializeField] float minSizeY = 0.33f;
-    [SerializeField] int evolutionCounter = 1;
-
-    public bool stageOne;
-    public bool stageTwo;
-    public bool stageThree;
-    public bool stageFour;
-    public bool stageFive;
 
     GameObject findPlayer;
     ShootBullets evolutionStage;
@@ -40,11 +34,6 @@ public class EvolutionScript : MonoBehaviour
 
         maxSizeX = transform.lossyScale.x;
         maxSizeY = transform.lossyScale.y;
-        stageOne = true;
-        stageTwo = false;
-        stageThree = false;
-        stageFour = false;  
-        stageFive = false;
     }
 
 
@@ -61,96 +50,14 @@ public class EvolutionScript : MonoBehaviour
                 float targetSizeY = Mathf.Lerp(minSizeY, maxSizeY, distanceToPlayer / 3);
 
                 transform.localScale = new Vector2(targetSizeX, targetSizeY);
-            }
-
-            if (distanceToPlayer <= 0.01f)
-            {
-                evolutionCounter++;
-                if (evolutionStage.evoStageOne && !evolutionStage.evoStageTwo && !evolutionStage.evoStageThree && !evolutionStage.evoStageFour && !evolutionStage.evoStageFive && evolutionCounter == 2)
-                {
-                    Debug.Log("2nd Phase Working");
-                    stageOne = false;
-                    stageTwo = true;
-                    stageThree = false;
-                    stageFour = false;
-                    stageFive = false;
-                    Destroy(gameObject);
-                }
-                if (!evolutionStage.evoStageOne && evolutionStage.evoStageTwo && !evolutionStage.evoStageThree && !evolutionStage.evoStageFour && !evolutionStage.evoStageFive && evolutionCounter == 3)
-                {
-                    stageOne = false;
-                    stageTwo = false;
-                    stageThree = true;
-                    stageFour = false;
-                    stageFive = false;
-                    Destroy(gameObject);
-                }
-                if (!evolutionStage.evoStageOne && !evolutionStage.evoStageTwo && evolutionStage.evoStageThree && !evolutionStage.evoStageFour && !evolutionStage.evoStageFive && evolutionCounter == 4)
-                {
-                    stageOne = false;
-                    stageTwo = false;
-                    stageThree = false;
-                    stageFour = true;
-                    stageFive = false;
-                    Destroy(gameObject);
-                }
-                if (!evolutionStage.evoStageOne && !evolutionStage.evoStageTwo && !evolutionStage.evoStageThree && evolutionStage.evoStageFour && !evolutionStage.evoStageFive && evolutionCounter == 5)
-                {
-                    stageOne = false;
-                    stageTwo = false;
-                    stageThree = false;
-                    stageFour = false;
-                    stageFive = true;
-                    Destroy(gameObject);
-                }
-            }
-            
+            }      
         }
         
     }
-    /*
+
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            evolutionCounter++;
-            if (evolutionStage.evoStageOne && !evolutionStage.evoStageTwo && !evolutionStage.evoStageThree && !evolutionStage.evoStageFour && !evolutionStage.evoStageFive && evolutionCounter == 2)
-            {
-                stageOne = false;
-                stageTwo = true;
-                stageThree = false;
-                stageFour = false;
-                stageFive = false;
-                Destroy(gameObject);
-            }
-            if (!evolutionStage.evoStageOne && evolutionStage.evoStageTwo && !evolutionStage.evoStageThree && !evolutionStage.evoStageFour && !evolutionStage.evoStageFive && evolutionCounter == 3)
-            {
-                stageOne = false;
-                stageTwo = false;
-                stageThree = true;
-                stageFour = false;
-                stageFive = false;
-                Destroy(gameObject);
-            }
-            if (!evolutionStage.evoStageOne && !evolutionStage.evoStageTwo && evolutionStage.evoStageThree && !evolutionStage.evoStageFour && !evolutionStage.evoStageFive && evolutionCounter == 4)
-            {
-                stageOne = false;
-                stageTwo = false;
-                stageThree = false;
-                stageFour = true;
-                stageFive = false;
-                Destroy(gameObject);
-            }
-            if (!evolutionStage.evoStageOne && !evolutionStage.evoStageTwo && !evolutionStage.evoStageThree && evolutionStage.evoStageFour && !evolutionStage.evoStageFive && evolutionCounter == 5)
-            {
-                stageOne = false;
-                stageTwo = false;
-                stageThree = false;
-                stageFour = false;
-                stageFive = true;
-                Destroy(gameObject);
-            }
-        }
+        Destroy(gameObject);
     }
-    */
+    
 }

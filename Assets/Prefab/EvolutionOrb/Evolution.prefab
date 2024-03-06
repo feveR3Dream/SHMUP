@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 5736781733211836478}
   - component: {fileID: 3189037216544872726}
   - component: {fileID: 7293408522670871440}
-  m_Layer: 0
+  - component: {fileID: 2336644762542706920}
+  - component: {fileID: 4191844457852076215}
+  m_Layer: 8
   m_Name: Evolution
-  m_TagString: Untagged
+  m_TagString: EvolutionOrb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,17 +114,73 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceToPlayer: 0
-  lerpToPlayerSpeed: 75
+  lerpToPlayerSpeed: 50
   maxSizeX: 0
   maxSizeY: 0
   minSizeX: 0.33
   minSizeY: 0.33
-  evolutionCounter: 1
-  stageOne: 0
-  stageTwo: 0
-  stageThree: 0
-  stageFour: 0
-  stageFive: 0
+--- !u!58 &2336644762542706920
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316984379548397533}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!50 &4191844457852076215
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316984379548397533}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!1 &7104724957715269656
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +192,7 @@ GameObject:
   - component: {fileID: 4409767561313625630}
   - component: {fileID: 35441946233313820}
   - component: {fileID: 1106180954881111316}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}

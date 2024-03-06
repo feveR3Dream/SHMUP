@@ -28,9 +28,13 @@ public class Health : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        dead = true;
-        GameObject deadEffect = Instantiate(deathEffect, transform.position, Quaternion.identity);
-        Destroy(deadEffect, 2f);
-        player.gameObject.SetActive(false);
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            dead = true;
+            GameObject deadEffect = Instantiate(deathEffect, transform.position, Quaternion.identity);
+            Destroy(deadEffect, 2f);
+            player.gameObject.SetActive(false);
+        }
+
     }
 }
