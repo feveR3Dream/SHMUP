@@ -25,6 +25,7 @@ public class ShootBullets : MonoBehaviour
     [SerializeField] int evolutionCounter = 1;
 
     [SerializeField] LayerMask detectionLayer;
+    [SerializeField] LayerMask detectionLayerSecond;
 
     public bool evoStageOne;
     public bool evoStageTwo;
@@ -257,8 +258,9 @@ public class ShootBullets : MonoBehaviour
     IEnumerator PlayerShootFunction() // This function checks if the player has started the game or not | Started = Shoot
     {
         yield return new WaitForSeconds(PM.delayInitial);
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, maxDistance, detectionLayer); // Raycast takes in original position, target direction, distance and layer
-        if (hit.collider != null)
+        RaycastHit2D hitObstacle = Physics2D.Raycast(transform.position, transform.up, maxDistance, detectionLayer); // Raycast takes in original position, target direction, distance and layer
+        RaycastHit2D hitEnemy = Physics2D.Raycast(transform.position, transform.up, maxDistance, detectionLayerSecond);
+        if (hitObstacle.collider != null || hitEnemy.collider != null)
         {
             currentFireRate = timeBetweenShot / 2;
         }
