@@ -28,7 +28,7 @@ public class Health : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Bullets") || collision.gameObject.CompareTag("Obstacles") || collision.gameObject.CompareTag("Enemy")) 
+        if (collision.gameObject.CompareTag("EnemyBullet") || collision.gameObject.CompareTag("Obstacles") || collision.gameObject.CompareTag("Enemy")) 
         {
             dead = true;
             GameObject deadEffect = Instantiate(deathEffect, transform.position, Quaternion.identity);

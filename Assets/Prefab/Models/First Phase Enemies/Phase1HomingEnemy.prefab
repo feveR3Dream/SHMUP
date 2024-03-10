@@ -76,7 +76,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -3
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9960785, g: 0, b: 0.43137258, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: b281b91a70a624a0da1c43adc1c30c7b, type: 3}
   m_Sprites:
@@ -409,7 +409,7 @@ TrailRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Time: 0.5
-  m_PreviewTimeScale: 0
+  m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -418,7 +418,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.01
+        value: 0.05
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -504,7 +504,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5908722499343418802}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: -5.422, y: 0.241, z: 0}
   m_LocalScale: {x: 0.12106028, y: 0.12106028, z: 0.12106028}
   m_ConstrainProportionsScale: 0
@@ -513,7 +513,7 @@ Transform:
   - {fileID: 235907658348337429}
   - {fileID: 5819329386329633028}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!212 &7726622186175050577
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -703,7 +703,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.01
+        value: 0.05
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -901,7 +901,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.01
+        value: 0.05
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -1134,7 +1134,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.01
+        value: 0.05
         inSlope: 0
         outSlope: 0
         tangentMode: 0

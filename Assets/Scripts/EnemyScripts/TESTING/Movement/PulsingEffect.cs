@@ -3,37 +3,37 @@ using UnityEngine;
 
 public class PulsingEffect : MonoBehaviour
 {
-    public float minScale = 1f; // Minimum scale
-    public float maxScale = 1.5f; // Maximum scale
-    public float pulseSpeed = 1f; // Speed of pulsing
+    public float minScale = 1f; 
+    public float maxScale = 1.5f; 
+    public float pulseSpeed = 1f; 
 
     void Start()
     {
-        while (true)
-        {
-            StartCoroutine(PulseEffect());
-        }
+        StartCoroutine(PulseEffect());     
     }
 
     IEnumerator PulseEffect()
     {
-        float t = 0f;
-
-        // Scale up
-        while (t < 1f)
+        while (true)
         {
-            t += Time.deltaTime * pulseSpeed;
-            transform.localScale = Vector3.Lerp(Vector3.one * minScale, Vector3.one * maxScale, t);
-            yield return null;
-        }
+            
+            float t = 0f;
 
-        // Scale down
-        t = 0f;
-        while (t < 1f)
-        {
-            t += Time.deltaTime * pulseSpeed;
-            transform.localScale = Vector3.Lerp(Vector3.one * maxScale, Vector3.one * minScale, t);
-            yield return null;
+            while (t < 1f)
+            {
+                t += Time.deltaTime * pulseSpeed;
+                transform.localScale = Vector3.Lerp(Vector3.one * minScale, Vector3.one * maxScale, t);
+                yield return null;
+            }
+
+            t = 0f;
+            while (t < 1f)
+            {
+                t += Time.deltaTime * pulseSpeed;
+                transform.localScale = Vector3.Lerp(Vector3.one * maxScale, Vector3.one * minScale, t);
+                yield return null;
+            }
+            
         }
     }
 }
