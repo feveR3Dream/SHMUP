@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerFollowMouse : MonoBehaviour
+public class PlayerKeyboardMovement : MonoBehaviour
 {
     [SerializeField] Camera cam;
     [SerializeField] float rotationSpeed = 5.0f;

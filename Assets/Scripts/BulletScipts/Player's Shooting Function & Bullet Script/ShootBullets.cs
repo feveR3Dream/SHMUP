@@ -11,18 +11,20 @@ public class ShootBullets : MonoBehaviour
     public GameObject firstEvolutionBullet;
     public GameObject secondEvolutionBullet;
 
-    /*
-    GameObject evolutionOrb;
-    EvolutionScript evolutionScript;
-    */
-
-    [SerializeField] PlayerFollowMouse PM;
+    [SerializeField] PlayerKeyboardMovement PKM;
     [SerializeField] PlayOption playStatus;
 
     [SerializeField] float bulletForce = 20f; // Bullet travelling speed
     [SerializeField] float timeBetweenShot = 0.5f; // Rate of fire
     [SerializeField] float maxDistance = 2f;
+    [SerializeField] float degreeAngle = 5f; // Serialized to check
+    //[SerializeField] float minDegreeAngle = 5f;
+    //[SerializeField] float maxDegreeAngle = 15f;
+    [SerializeField] float outerDegreeAngle = 15f; // Serialized to check
+    //[SerializeField] float minOuterDegreeAngle = 15f;
+    //[SerializeField] float maxOuterDegreeAngle = 30f;
     [SerializeField] int evolutionCounter = 1;
+    [SerializeField] float spreadSpeed = 1f;
 
     [SerializeField] LayerMask detectionLayer;
     [SerializeField] LayerMask detectionLayerSecond;
@@ -44,11 +46,12 @@ public class ShootBullets : MonoBehaviour
         evoStageFour = false;
         evoStageFive = false;
         currentFireRate = timeBetweenShot;
+
+
     }
 
     void Update()
     {
-
         if (playStatus.started)
         {
             StartCoroutine(PlayerShootFunction());
@@ -99,7 +102,6 @@ public class ShootBullets : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("EvolutionOrb") && collision.gameObject.layer == LayerMask.NameToLayer("EvolutionOrb"))
         {
-            Debug.Log("Eaten and Consumed");
             evolutionCounter++;
         }
     }
@@ -118,146 +120,133 @@ public class ShootBullets : MonoBehaviour
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>(); // We use GetComponent here because our firstEvolutionBullet is a PREFAB, thus, using GetComponent
         rb.AddForce(Vector2.up * bulletForce, ForceMode2D.Impulse); // AddForce is a normal practice to use when GameObject has a RigidBody component => Move stuff around.
     }
-
     IEnumerator StageTwoDelayEachShot() // This function handles the delaying between each shots | Raycasting command would work in this function
     {
         canShoot = false;
-        StageTwoBullet();
+        StageTwoBullet(bulletForce, degreeAngle);
         yield return new WaitForSeconds(currentFireRate);
         canShoot = true;
     }
 
-    void StageTwoBullet() // | STAGE TWO EVOLUTION
+    void StageTwoBullet(float force, float angle) // | STAGE TWO EVOLUTION
     {
-        Quaternion rotationRight = Quaternion.Euler(0f, 0f, 45f);
-        Quaternion rotationLeft = Quaternion.Euler(0f, 0f, -45);
-
         GameObject bullet = Instantiate(firstEvolutionBullet, firePointFirstSecondEvolution.position, Quaternion.identity); // Shoot straight
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(Vector2.up * bulletForce, ForceMode2D.Impulse);
 
-        GameObject bulletRight = Instantiate(firstEvolutionBullet, firePointThirdEvolutionRight.position, Quaternion.Euler(0f, 0f, -22.5f)); // Shoot right
-        Rigidbody2D rbRight = bulletRight.GetComponent<Rigidbody2D>();
-        Vector2 rightVector = rotationRight * Vector2.right;
-        rbRight.AddForce((Vector2.up + rightVector).normalized * bulletForce, ForceMode2D.Impulse);
+        float xcomponent = Mathf.Cos(angle * Mathf.PI / 180) * force; // Cosine returns X component 
+        float ycomponent = Mathf.Sin(angle * Mathf.PI / 180) * force; // Sine returns Y component
 
-        GameObject bulletLeft = Instantiate(firstEvolutionBullet, firePointThirdEvolutionLeft.position, Quaternion.Euler(0f, 0f, 22.5f)); // Shoot left
+        GameObject bulletRight = Instantiate(firstEvolutionBullet, firePointThirdEvolutionRight.position, Quaternion.Euler(0f, 0f, -degreeAngle)); // Shoot right
+        Rigidbody2D rbRight = bulletRight.GetComponent<Rigidbody2D>();
+        rbRight.AddForce(new Vector2(ycomponent, xcomponent), ForceMode2D.Impulse);
+
+        GameObject bulletLeft = Instantiate(firstEvolutionBullet, firePointThirdEvolutionLeft.position, Quaternion.Euler(0f, 0f, degreeAngle)); // Shoot left
         Rigidbody2D rbLeft = bulletLeft.GetComponent<Rigidbody2D>();
-        Vector2 leftVector = rotationLeft * Vector2.left;
-        rbLeft.AddForce((Vector2.up + leftVector).normalized * bulletForce, ForceMode2D.Impulse);
+        rbLeft.AddForce(new Vector2(-ycomponent, xcomponent), ForceMode2D.Impulse); // rb.AddForce(Vector3.up * bulletForce, ForceMode2D.Impulse)
     }
 
     IEnumerator StageThreeDelayEachShot() 
     {
         canShoot = false;
-        StageThreeBullet();
+        StageThreeBullet(bulletForce, degreeAngle, outerDegreeAngle);
         yield return new WaitForSeconds(currentFireRate);
         canShoot = true;
     }
 
-    void StageThreeBullet() // | STAGE THREE EVOLUTION
+    void StageThreeBullet(float force, float angle, float outerAngle) // | STAGE THREE EVOLUTION
     {
-        Quaternion rotationRight = Quaternion.Euler(0f, 0f, 45f); // Right angle
-        Quaternion rotationLeft = Quaternion.Euler(0f, 0f, -45f); // Left angle
-        Quaternion rotationFarRight = Quaternion.Euler(0f, 0f, 2.5f); // Right angle
-        Quaternion rotationFarLeft = Quaternion.Euler(0f, 0f, -2.5f); // Left angle
-
         GameObject bullet = Instantiate(secondEvolutionBullet, firePointFirstSecondEvolution.position, Quaternion.identity); // Shoot straight
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(Vector2.up * bulletForce, ForceMode2D.Impulse);
 
-        GameObject bulletRight = Instantiate(firstEvolutionBullet, firePointThirdEvolutionRight.position, Quaternion.Euler(0f, 0f, -22.5f)); // Shoot right (rotation)
+        float xcomponent = Mathf.Cos(angle * Mathf.PI / 180) * force; 
+        float ycomponent = Mathf.Sin(angle * Mathf.PI / 180) * force;
+        float outerxcomponent = Mathf.Cos(outerAngle * Mathf.PI / 180) * force;
+        float outerycomponent = Mathf.Sin(outerAngle * Mathf.PI / 180) * force;
+
+        GameObject bulletRight = Instantiate(firstEvolutionBullet, firePointThirdEvolutionRight.position, Quaternion.Euler(0f, 0f, -degreeAngle)); // Shoot right
         Rigidbody2D rbRight = bulletRight.GetComponent<Rigidbody2D>();
-        Vector2 rightVector = rotationRight * Vector2.right;
-        rbRight.AddForce((Vector2.up + rightVector).normalized * bulletForce, ForceMode2D.Impulse);
+        rbRight.AddForce(new Vector2(ycomponent, xcomponent), ForceMode2D.Impulse);
 
-        GameObject bulletFarRight = Instantiate(firstEvolutionBullet, firePointThirdEvolutionRight.position, Quaternion.Euler(0f, 0f, -42.5f)); // Shoot right (rotation)
-        Rigidbody2D rbFarRight = bulletFarRight.GetComponent<Rigidbody2D>();
-        Vector2 farRightVector = rotationFarRight * Vector2.right;
-        rbFarRight.AddForce((Vector2.up + farRightVector).normalized * bulletForce, ForceMode2D.Impulse);
-
-        GameObject bulletLeft = Instantiate(firstEvolutionBullet, firePointThirdEvolutionLeft.position, Quaternion.Euler(0f, 0f, 22.5f)); // Shoot left (rotation)
+        GameObject bulletLeft = Instantiate(firstEvolutionBullet, firePointThirdEvolutionLeft.position, Quaternion.Euler(0f, 0f, degreeAngle)); // Shoot left
         Rigidbody2D rbLeft = bulletLeft.GetComponent<Rigidbody2D>();
-        Vector2 leftVector = rotationLeft * Vector2.left;
-        rbLeft.AddForce((Vector2.up + leftVector).normalized * bulletForce, ForceMode2D.Impulse);
+        rbLeft.AddForce(new Vector2(-ycomponent, xcomponent), ForceMode2D.Impulse);
 
-        GameObject bulletFarLeft = Instantiate(firstEvolutionBullet, firePointThirdEvolutionLeft.position, Quaternion.Euler(0f, 0f, 42.5f)); // Shoot right (rotation)
+        GameObject bulletFarRight = Instantiate(firstEvolutionBullet, firePointThirdEvolutionFarRight.position, Quaternion.Euler(0f, 0f, -outerAngle)); // Shoot right 
+        Rigidbody2D rbFarRight = bulletFarRight.GetComponent<Rigidbody2D>();
+        rbFarRight.AddForce(new Vector2(outerycomponent, outerxcomponent), ForceMode2D.Impulse);
+
+        GameObject bulletFarLeft = Instantiate(firstEvolutionBullet, firePointThirdEvolutionFarLeft.position, Quaternion.Euler(0f, 0f, outerAngle)); // Shoot left
         Rigidbody2D rbFarLeft = bulletFarLeft.GetComponent<Rigidbody2D>();
-        Vector2 farLeftVector = rotationFarLeft * Vector2.left;
-        rbFarLeft.AddForce((Vector2.up + farLeftVector).normalized * bulletForce, ForceMode2D.Impulse);
+        rbFarLeft.AddForce(new Vector2(-outerycomponent, outerxcomponent), ForceMode2D.Impulse);
     }
 
     IEnumerator StageFourDelayEachShot() // This function handles the delaying between each shots | Raycasting command would work in this function
     {
         canShoot = false;
-        StageFourBullet();
+        StageFourBullet(bulletForce, degreeAngle);
         yield return new WaitForSeconds(currentFireRate);
         canShoot = true;
     }
 
-    void StageFourBullet() // | STAGE FOUR EVOLUTION
+    void StageFourBullet(float force, float angle) // | STAGE FOUR EVOLUTION
     {
-        Quaternion rotationRight = Quaternion.Euler(0f, 0f, 45f);
-        Quaternion rotationLeft = Quaternion.Euler(0f, 0f, -45);
-
         GameObject bullet = Instantiate(secondEvolutionBullet, firePointFirstSecondEvolution.position, Quaternion.identity); // Shoot straight
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(Vector2.up * bulletForce, ForceMode2D.Impulse);
 
-        GameObject bulletRight = Instantiate(secondEvolutionBullet, firePointThirdEvolutionRight.position, Quaternion.Euler(0f, 0f, -22.5f)); // Shoot right
-        Rigidbody2D rbRight = bulletRight.GetComponent<Rigidbody2D>();
-        Vector2 rightVector = rotationRight * Vector2.right;
-        rbRight.AddForce((Vector2.up + rightVector).normalized * bulletForce, ForceMode2D.Impulse);
+        float xcomponent = Mathf.Cos(angle * Mathf.PI / 180) * force; // Cosine returns X component
+        float ycomponent = Mathf.Sin(angle * Mathf.PI / 180) * force; // Sine returns Y component
 
-        GameObject bulletLeft = Instantiate(secondEvolutionBullet, firePointThirdEvolutionLeft.position, Quaternion.Euler(0f, 0f, 22.5f)); // Shoot left
+        GameObject bulletRight = Instantiate(secondEvolutionBullet, firePointThirdEvolutionRight.position, Quaternion.Euler(0f, 0f, -degreeAngle)); // Shoot right
+        Rigidbody2D rbRight = bulletRight.GetComponent<Rigidbody2D>();
+        rbRight.AddForce(new Vector2(ycomponent, xcomponent), ForceMode2D.Impulse);
+
+        GameObject bulletLeft = Instantiate(secondEvolutionBullet, firePointThirdEvolutionLeft.position, Quaternion.Euler(0f, 0f, degreeAngle)); // Shoot left
         Rigidbody2D rbLeft = bulletLeft.GetComponent<Rigidbody2D>();
-        Vector2 leftVector = rotationLeft * Vector2.left;
-        rbLeft.AddForce((Vector2.up + leftVector).normalized * bulletForce, ForceMode2D.Impulse);
+        rbLeft.AddForce(new Vector2(-ycomponent, xcomponent), ForceMode2D.Impulse);
     }
 
     IEnumerator StageFiveDelayEachShot()
     {
         canShoot = false;
-        StageFiveBullet();
+        StageFiveBullet(bulletForce, degreeAngle, outerDegreeAngle);
         yield return new WaitForSeconds(currentFireRate);
         canShoot = true;
     }
 
-    void StageFiveBullet() // | STAGE FIVE EVOLUTION
+    void StageFiveBullet(float force, float angle, float outerAngle) // | STAGE FIVE EVOLUTION
     {
-        Quaternion rotationRight = Quaternion.Euler(0f, 0f, 45f); // Right angle
-        Quaternion rotationLeft = Quaternion.Euler(0f, 0f, -45f); // Left angle
-        Quaternion rotationFarRight = Quaternion.Euler(0f, 0f, 2.5f); // Right angle
-        Quaternion rotationFarLeft = Quaternion.Euler(0f, 0f, -2.5f); // Left angle
-
         GameObject bullet = Instantiate(secondEvolutionBullet, firePointFirstSecondEvolution.position, Quaternion.identity); // Shoot straight
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(Vector2.up * bulletForce, ForceMode2D.Impulse);
 
-        GameObject bulletRight = Instantiate(secondEvolutionBullet, firePointThirdEvolutionRight.position, Quaternion.Euler(0f, 0f, -22.5f)); // Shoot right (rotation)
+        float xcomponent = Mathf.Cos(angle * Mathf.PI / 180) * force;
+        float ycomponent = Mathf.Sin(angle * Mathf.PI / 180) * force;
+        float outerxcomponent = Mathf.Cos(outerAngle * Mathf.PI / 180) * force;
+        float outerycomponent = Mathf.Sin(outerAngle * Mathf.PI / 180) * force;
+
+        GameObject bulletRight = Instantiate(secondEvolutionBullet, firePointThirdEvolutionRight.position, Quaternion.Euler(0f, 0f, -degreeAngle)); // Shoot right
         Rigidbody2D rbRight = bulletRight.GetComponent<Rigidbody2D>();
-        Vector2 rightVector = rotationRight * Vector2.right;
-        rbRight.AddForce((Vector2.up + rightVector).normalized * bulletForce, ForceMode2D.Impulse);
+        rbRight.AddForce(new Vector2(ycomponent, xcomponent), ForceMode2D.Impulse);
 
-        GameObject bulletFarRight = Instantiate(secondEvolutionBullet, firePointThirdEvolutionFarRight.position, Quaternion.Euler(0f, 0f, -42.5f)); // Shoot right (rotation)
-        Rigidbody2D rbFarRight = bulletFarRight.GetComponent<Rigidbody2D>();
-        Vector2 farRightVector = rotationFarRight * Vector2.right;
-        rbFarRight.AddForce((Vector2.up + farRightVector).normalized * bulletForce, ForceMode2D.Impulse);
-
-        GameObject bulletLeft = Instantiate(secondEvolutionBullet, firePointThirdEvolutionLeft.position, Quaternion.Euler(0f, 0f, 22.5f)); // Shoot left (rotation)
+        GameObject bulletLeft = Instantiate(secondEvolutionBullet, firePointThirdEvolutionLeft.position, Quaternion.Euler(0f, 0f, degreeAngle)); // Shoot left
         Rigidbody2D rbLeft = bulletLeft.GetComponent<Rigidbody2D>();
-        Vector2 leftVector = rotationLeft * Vector2.left;
-        rbLeft.AddForce((Vector2.up + leftVector).normalized * bulletForce, ForceMode2D.Impulse);
+        rbLeft.AddForce(new Vector2(-ycomponent, xcomponent), ForceMode2D.Impulse);
 
-        GameObject bulletFarLeft = Instantiate(secondEvolutionBullet, firePointThirdEvolutionFarLeft.position, Quaternion.Euler(0f, 0f, 42.5f)); // Shoot right (rotation)
+        GameObject bulletFarRight = Instantiate(secondEvolutionBullet, firePointThirdEvolutionFarRight.position, Quaternion.Euler(0f, 0f, -outerAngle)); // Shoot right 
+        Rigidbody2D rbFarRight = bulletFarRight.GetComponent<Rigidbody2D>();
+        rbFarRight.AddForce(new Vector2(outerycomponent, outerxcomponent), ForceMode2D.Impulse);
+
+        GameObject bulletFarLeft = Instantiate(secondEvolutionBullet, firePointThirdEvolutionFarLeft.position, Quaternion.Euler(0f, 0f, outerAngle)); // Shoot left
         Rigidbody2D rbFarLeft = bulletFarLeft.GetComponent<Rigidbody2D>();
-        Vector2 farLeftVector = rotationFarLeft * Vector2.left;
-        rbFarLeft.AddForce((Vector2.up + farLeftVector).normalized * bulletForce, ForceMode2D.Impulse);
+        rbFarLeft.AddForce(new Vector2(-outerycomponent, outerxcomponent), ForceMode2D.Impulse);
     }
 
     IEnumerator PlayerShootFunction() // This function checks if the player has started the game or not | Started = Shoot
     {
-        yield return new WaitForSeconds(PM.delayInitial);
+        yield return new WaitForSeconds(PKM.delayInitial);
         RaycastHit2D hitObstacle = Physics2D.Raycast(transform.position, transform.up, maxDistance, detectionLayer); // Raycast takes in original position, target direction, distance and layer
         RaycastHit2D hitEnemy = Physics2D.Raycast(transform.position, transform.up, maxDistance, detectionLayerSecond);
         if (hitObstacle.collider != null || hitEnemy.collider != null)
