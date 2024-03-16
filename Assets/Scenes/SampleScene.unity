@@ -17722,6 +17722,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5409824983463879856}
     - target: {fileID: 7271686335043241345, guid: 01f0685e86af61d4b8b6ea8d20707fcc, type: 3}
+      propertyPath: duration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271686335043241345, guid: 01f0685e86af61d4b8b6ea8d20707fcc, type: 3}
       propertyPath: playStatus
       value: 
       objectReference: {fileID: 625147643}
@@ -17731,11 +17735,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7271686335043241345, guid: 01f0685e86af61d4b8b6ea8d20707fcc, type: 3}
       propertyPath: degreeAngle
-      value: 15
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7271686335043241345, guid: 01f0685e86af61d4b8b6ea8d20707fcc, type: 3}
       propertyPath: spreadSpeed
-      value: 20
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271686335043241345, guid: 01f0685e86af61d4b8b6ea8d20707fcc, type: 3}
+      propertyPath: maxDegreeAngle
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271686335043241345, guid: 01f0685e86af61d4b8b6ea8d20707fcc, type: 3}
+      propertyPath: minDegreeAngle
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7271686335043241345, guid: 01f0685e86af61d4b8b6ea8d20707fcc, type: 3}
       propertyPath: timeBetweenShot
@@ -17743,7 +17755,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7271686335043241345, guid: 01f0685e86af61d4b8b6ea8d20707fcc, type: 3}
       propertyPath: outerDegreeAngle
-      value: 30
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271686335043241345, guid: 01f0685e86af61d4b8b6ea8d20707fcc, type: 3}
+      propertyPath: maxOuterDegreeAngle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271686335043241345, guid: 01f0685e86af61d4b8b6ea8d20707fcc, type: 3}
+      propertyPath: minOuterDegreeAngle
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7271686335043241345, guid: 01f0685e86af61d4b8b6ea8d20707fcc, type: 3}
       propertyPath: firstEvolutionBullet

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class ShootBullets : MonoBehaviour
 {
-    public Transform firePointFirstSecondEvolution; // Using Transform gives access to the desire direction/rotation/scale value we want to access/reference.
+    public Transform firePointFirstSecondEvolution; 
     public Transform firePointThirdEvolutionLeft;
     public Transform firePointThirdEvolutionRight;
     public Transform firePointThirdEvolutionFarLeft;
@@ -16,15 +16,15 @@ public class ShootBullets : MonoBehaviour
 
     [SerializeField] float bulletForce = 20f; // Bullet travelling speed
     [SerializeField] float timeBetweenShot = 0.5f; // Rate of fire
-    [SerializeField] float maxDistance = 2f;
-    [SerializeField] float degreeAngle = 5f; // Serialized to check
-    //[SerializeField] float minDegreeAngle = 5f;
-    //[SerializeField] float maxDegreeAngle = 15f;
-    [SerializeField] float outerDegreeAngle = 15f; // Serialized to check
-    //[SerializeField] float minOuterDegreeAngle = 15f;
-    //[SerializeField] float maxOuterDegreeAngle = 30f;
+    [SerializeField] float maxDistance = 2f; // RayCasting distance (from the player ---> enemy)
+    [SerializeField] float degreeAngle; // Angle of the inner bullet spread (the 2nd bullet instantiation position from the middle bullet instantiation position [Both left and right]) 
+    [SerializeField] float minDegreeAngle = 5f;
+    [SerializeField] float maxDegreeAngle = 15f;
+    [SerializeField] float outerDegreeAngle; // Angle of the outer bullet spread (the 3rd bullet instantiation position from the middle bullet instantiation position [Both left and right])
+    [SerializeField] float minOuterDegreeAngle = 15f;
+    [SerializeField] float maxOuterDegreeAngle = 30f;
     [SerializeField] int evolutionCounter = 1;
-    [SerializeField] float spreadSpeed = 1f;
+    [SerializeField] float duration = 1f; // Duration of bullet spreading in and out (measure in unit of second)
 
     [SerializeField] LayerMask detectionLayer;
     [SerializeField] LayerMask detectionLayerSecond;
@@ -37,6 +37,8 @@ public class ShootBullets : MonoBehaviour
 
     float currentFireRate;
     bool canShoot = true;
+    bool increasing;
+    bool outerIncreasing;
 
     void Start()
     {
@@ -47,11 +49,56 @@ public class ShootBullets : MonoBehaviour
         evoStageFive = false;
         currentFireRate = timeBetweenShot;
 
-
+        degreeAngle = minDegreeAngle;
+        outerDegreeAngle = minOuterDegreeAngle;
     }
 
     void Update()
     {
+        /////////////////////////////////////////////////////////////////////////////////////////
+        float t = Mathf.PingPong(Time.time / duration, 1f); // MUST REMEMBER //               //
+        degreeAngle = Mathf.Lerp(minDegreeAngle, maxDegreeAngle, t);                         //
+        if (degreeAngle >= maxDegreeAngle)                                                  //
+        {                                                                                  //
+            increasing = false;                                                           //
+        }                                                                                //
+        else if (degreeAngle <= minDegreeAngle)                                         //
+        {                                                                              //
+            increasing = true;                                                        //
+        }                                                                            //   Bullet Spread
+                                                                                    //
+        if (increasing)                                                            //
+        {                                                                         //
+            degreeAngle = Mathf.Lerp(maxDegreeAngle, minDegreeAngle, t);         //
+        }                                                                       //
+                                                                               //
+        if (!increasing)                                                      //    
+        {                                                                    //
+            degreeAngle = Mathf.Lerp(minDegreeAngle, maxDegreeAngle, t);    //
+        }////////////////////////////////////////////////////////////////////
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////
+        outerDegreeAngle = Mathf.Lerp(minDegreeAngle, maxDegreeAngle, t);                                  //
+        if (outerDegreeAngle >= maxOuterDegreeAngle)                                                      //
+        {                                                                                                //
+            outerIncreasing = false;                                                                    //
+        }                                                                                              //
+        else if (outerDegreeAngle <= minOuterDegreeAngle)                                             //
+        {                                                                                            //
+            outerIncreasing = true;                                                                 //
+        }                                                                                          //
+                                                                                                  //
+        if (outerIncreasing)                                                                     //   Outer Bullet Spread
+        {                                                                                       //
+            outerDegreeAngle = Mathf.Lerp(maxOuterDegreeAngle, minOuterDegreeAngle, t);        //
+        }                                                                                     //
+                                                                                             //
+        if (!outerIncreasing)                                                               //
+        {                                                                                  //
+            outerDegreeAngle = Mathf.Lerp(minOuterDegreeAngle, maxOuterDegreeAngle, t);   //
+        }                                                                                //
+        //////////////////////////////////////////////////////////////////////////////////
+
         if (playStatus.started)
         {
             StartCoroutine(PlayerShootFunction());
@@ -106,7 +153,7 @@ public class ShootBullets : MonoBehaviour
         }
     }
 
-    IEnumerator StageOneDelayEachShot() // This function handles the delaying between each shots | Raycasting command would work in this function
+    IEnumerator StageOneDelayEachShot() // This function handles the delaying between each shots 
     {
         canShoot = false;
         StageOneBullet();
@@ -120,7 +167,7 @@ public class ShootBullets : MonoBehaviour
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>(); // We use GetComponent here because our firstEvolutionBullet is a PREFAB, thus, using GetComponent
         rb.AddForce(Vector2.up * bulletForce, ForceMode2D.Impulse); // AddForce is a normal practice to use when GameObject has a RigidBody component => Move stuff around.
     }
-    IEnumerator StageTwoDelayEachShot() // This function handles the delaying between each shots | Raycasting command would work in this function
+    IEnumerator StageTwoDelayEachShot() // This function handles the delaying between each shots 
     {
         canShoot = false;
         StageTwoBullet(bulletForce, degreeAngle);
@@ -182,7 +229,7 @@ public class ShootBullets : MonoBehaviour
         rbFarLeft.AddForce(new Vector2(-outerycomponent, outerxcomponent), ForceMode2D.Impulse);
     }
 
-    IEnumerator StageFourDelayEachShot() // This function handles the delaying between each shots | Raycasting command would work in this function
+    IEnumerator StageFourDelayEachShot() // This function handles the delaying between each shots 
     {
         canShoot = false;
         StageFourBullet(bulletForce, degreeAngle);
@@ -208,7 +255,7 @@ public class ShootBullets : MonoBehaviour
         rbLeft.AddForce(new Vector2(-ycomponent, xcomponent), ForceMode2D.Impulse);
     }
 
-    IEnumerator StageFiveDelayEachShot()
+    IEnumerator StageFiveDelayEachShot() // This function handles the delaying between each shots 
     {
         canShoot = false;
         StageFiveBullet(bulletForce, degreeAngle, outerDegreeAngle);
