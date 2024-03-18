@@ -13,8 +13,6 @@ public class RotationTesting : MonoBehaviour
         anotherCube = GameObject.FindWithTag("TESTING");
         if (anotherCube == null)
             Debug.Log("Could not find this MF");
-        else 
-            anotherCube = GetComponent<GameObject>();
     }
 
     void Update()

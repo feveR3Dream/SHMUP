@@ -30,6 +30,6 @@ public class EnemyBulletSpinning : MonoBehaviour
 
     void Update()
     {
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 5f);
     }
 }
