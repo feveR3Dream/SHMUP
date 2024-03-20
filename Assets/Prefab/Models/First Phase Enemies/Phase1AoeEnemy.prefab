@@ -438,6 +438,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3441294255802125071}
   - component: {fileID: 1703969136816293151}
+  - component: {fileID: 4934175306922703515}
   m_Layer: 9
   m_Name: Phase1AoeEnemy
   m_TagString: Enemy
@@ -479,5 +480,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyBullet: {fileID: 7841187485992158532, guid: 282a67e568318ad419fcac8fd50fe2cd, type: 3}
   shootingPosition: {fileID: 4266051218532773805}
-  bulletForce: 5
-  timeBetweenShot: 2
+  bulletForce: 3
+  timeBetweenShot: 1
+  spinSpeed: 50
+  degreeAngleUp: 0
+  degreeAngleUpRight: 15
+  degreeAngleUpLeft: -15
+  degreeAngleRight: 90
+  degreeAngleRightUp: 75
+  degreeAngleRightDown: 105
+  degreeAngleLeft: 270
+  degreeAngleLeftUp: 285
+  degreeAngleLeftDown: 255
+  degreeAngleDown: 180
+  degreeAngleDownRight: 165
+  degreeAngleDownLeft: 195
+--- !u!114 &4934175306922703515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8121988791223999766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eac1f830e2e21ad41bc7fa1594bd6839, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinVelocity: 100

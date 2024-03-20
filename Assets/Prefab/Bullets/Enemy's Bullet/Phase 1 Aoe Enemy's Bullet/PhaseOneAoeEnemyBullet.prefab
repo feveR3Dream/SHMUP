@@ -685,7 +685,7 @@ GameObject:
   - component: {fileID: 6412207761411912743}
   - component: {fileID: 3815021394300614484}
   m_Layer: 10
-  m_Name: AoeEnemyBullet
+  m_Name: PhaseOneAoeEnemyBullet
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

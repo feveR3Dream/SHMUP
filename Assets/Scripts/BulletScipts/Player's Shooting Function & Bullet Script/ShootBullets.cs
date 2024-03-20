@@ -10,6 +10,8 @@ public class ShootBullets : MonoBehaviour
     public Transform firePointThirdEvolutionFarRight;
     public GameObject firstEvolutionBullet;
     public GameObject secondEvolutionBullet;
+    public GameObject firstFireEffect;
+    public GameObject secondFireEffect;
 
     [SerializeField] PlayerKeyboardMovement PKM;
     [SerializeField] PlayOption playStatus;
@@ -163,6 +165,8 @@ public class ShootBullets : MonoBehaviour
 
     void StageOneBullet() // This function handles the Instantiation of bullets | STAGE ONE EVOLUTION
     {
+        GameObject effect = Instantiate(firstFireEffect, firePointFirstSecondEvolution.position, Quaternion.identity);
+        Destroy(effect, 0.5f);
         GameObject bullet = Instantiate(firstEvolutionBullet, firePointFirstSecondEvolution.position, Quaternion.identity);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>(); // We use GetComponent here because our firstEvolutionBullet is a PREFAB, thus, using GetComponent
         rb.AddForce(Vector2.up * bulletForce, ForceMode2D.Impulse); // AddForce is a normal practice to use when GameObject has a RigidBody component => Move stuff around.
@@ -177,6 +181,8 @@ public class ShootBullets : MonoBehaviour
 
     void StageTwoBullet(float force, float angle) // | STAGE TWO EVOLUTION
     {
+        GameObject effect = Instantiate(firstFireEffect, firePointFirstSecondEvolution.position, Quaternion.identity);
+        Destroy(effect, 0.5f);
         GameObject bullet = Instantiate(firstEvolutionBullet, firePointFirstSecondEvolution.position, Quaternion.identity); // Shoot straight
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(Vector2.up * bulletForce, ForceMode2D.Impulse);
@@ -184,9 +190,15 @@ public class ShootBullets : MonoBehaviour
         float xcomponent = Mathf.Cos(angle * Mathf.PI / 180) * force; // Cosine returns X component 
         float ycomponent = Mathf.Sin(angle * Mathf.PI / 180) * force; // Sine returns Y component
 
+        GameObject effectRight = Instantiate(firstFireEffect, firePointThirdEvolutionRight.position, Quaternion.Euler(0f, 0f, -degreeAngle));
+        Destroy(effectRight, 0.5f);
+
         GameObject bulletRight = Instantiate(firstEvolutionBullet, firePointThirdEvolutionRight.position, Quaternion.Euler(0f, 0f, -degreeAngle)); // Shoot right
         Rigidbody2D rbRight = bulletRight.GetComponent<Rigidbody2D>();
         rbRight.AddForce(new Vector2(ycomponent, xcomponent), ForceMode2D.Impulse);
+
+        GameObject effectLeft = Instantiate(firstFireEffect, firePointThirdEvolutionLeft.position, Quaternion.Euler(0f, 0f, degreeAngle));
+        Destroy(effectLeft, 0.5f);
 
         GameObject bulletLeft = Instantiate(firstEvolutionBullet, firePointThirdEvolutionLeft.position, Quaternion.Euler(0f, 0f, degreeAngle)); // Shoot left
         Rigidbody2D rbLeft = bulletLeft.GetComponent<Rigidbody2D>();
@@ -201,8 +213,12 @@ public class ShootBullets : MonoBehaviour
         canShoot = true;
     }
 
+    // Make bullet effect for stage three bullet evolution onwards! [PLEASE REMEMBER THIS SHIT TOMORROWWWWWW]
+
     void StageThreeBullet(float force, float angle, float outerAngle) // | STAGE THREE EVOLUTION
     {
+        GameObject effect = Instantiate(secondFireEffect, firePointFirstSecondEvolution.position, Quaternion.identity);
+        Destroy(effect, 0.5f);
         GameObject bullet = Instantiate(secondEvolutionBullet, firePointFirstSecondEvolution.position, Quaternion.identity); // Shoot straight
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(Vector2.up * bulletForce, ForceMode2D.Impulse);
@@ -212,17 +228,29 @@ public class ShootBullets : MonoBehaviour
         float outerxcomponent = Mathf.Cos(outerAngle * Mathf.PI / 180) * force;
         float outerycomponent = Mathf.Sin(outerAngle * Mathf.PI / 180) * force;
 
+        GameObject effectRight = Instantiate(firstFireEffect, firePointThirdEvolutionRight.position, Quaternion.Euler(0f, 0f, -degreeAngle));
+        Destroy(effectRight, 0.5f);
+
         GameObject bulletRight = Instantiate(firstEvolutionBullet, firePointThirdEvolutionRight.position, Quaternion.Euler(0f, 0f, -degreeAngle)); // Shoot right
         Rigidbody2D rbRight = bulletRight.GetComponent<Rigidbody2D>();
         rbRight.AddForce(new Vector2(ycomponent, xcomponent), ForceMode2D.Impulse);
+
+        GameObject effectLeft = Instantiate(firstFireEffect, firePointThirdEvolutionLeft.position, Quaternion.Euler(0f, 0f, degreeAngle));
+        Destroy(effectLeft, 0.5f);
 
         GameObject bulletLeft = Instantiate(firstEvolutionBullet, firePointThirdEvolutionLeft.position, Quaternion.Euler(0f, 0f, degreeAngle)); // Shoot left
         Rigidbody2D rbLeft = bulletLeft.GetComponent<Rigidbody2D>();
         rbLeft.AddForce(new Vector2(-ycomponent, xcomponent), ForceMode2D.Impulse);
 
+        GameObject effectOuterRight = Instantiate(firstFireEffect, firePointThirdEvolutionFarRight.position, Quaternion.Euler(0f, 0f, -outerAngle));
+        Destroy(effectOuterRight, 0.5f);
+
         GameObject bulletFarRight = Instantiate(firstEvolutionBullet, firePointThirdEvolutionFarRight.position, Quaternion.Euler(0f, 0f, -outerAngle)); // Shoot right 
         Rigidbody2D rbFarRight = bulletFarRight.GetComponent<Rigidbody2D>();
         rbFarRight.AddForce(new Vector2(outerycomponent, outerxcomponent), ForceMode2D.Impulse);
+
+        GameObject effectOuterLeft = Instantiate(firstFireEffect, firePointThirdEvolutionFarLeft.position, Quaternion.Euler(0f, 0f, outerAngle));
+        Destroy(effectOuterLeft, 0.5f);
 
         GameObject bulletFarLeft = Instantiate(firstEvolutionBullet, firePointThirdEvolutionFarLeft.position, Quaternion.Euler(0f, 0f, outerAngle)); // Shoot left
         Rigidbody2D rbFarLeft = bulletFarLeft.GetComponent<Rigidbody2D>();
@@ -239,20 +267,28 @@ public class ShootBullets : MonoBehaviour
 
     void StageFourBullet(float force, float angle) // | STAGE FOUR EVOLUTION
     {
+        GameObject effect = Instantiate(secondFireEffect, firePointFirstSecondEvolution.position, Quaternion.identity);
+        Destroy(effect, 0.5f);
         GameObject bullet = Instantiate(secondEvolutionBullet, firePointFirstSecondEvolution.position, Quaternion.identity); // Shoot straight
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(Vector2.up * bulletForce, ForceMode2D.Impulse);
 
-        float xcomponent = Mathf.Cos(angle * Mathf.PI / 180) * force; // Cosine returns X component
+        float xcomponent = Mathf.Cos(angle * Mathf.PI / 180) * force; // Cosine returns X component 
         float ycomponent = Mathf.Sin(angle * Mathf.PI / 180) * force; // Sine returns Y component
+
+        GameObject effectRight = Instantiate(secondFireEffect, firePointThirdEvolutionRight.position, Quaternion.Euler(0f, 0f, -degreeAngle));
+        Destroy(effectRight, 0.5f);
 
         GameObject bulletRight = Instantiate(secondEvolutionBullet, firePointThirdEvolutionRight.position, Quaternion.Euler(0f, 0f, -degreeAngle)); // Shoot right
         Rigidbody2D rbRight = bulletRight.GetComponent<Rigidbody2D>();
         rbRight.AddForce(new Vector2(ycomponent, xcomponent), ForceMode2D.Impulse);
 
+        GameObject effectLeft = Instantiate(secondFireEffect, firePointThirdEvolutionLeft.position, Quaternion.Euler(0f, 0f, degreeAngle));
+        Destroy(effectLeft, 0.5f);
+
         GameObject bulletLeft = Instantiate(secondEvolutionBullet, firePointThirdEvolutionLeft.position, Quaternion.Euler(0f, 0f, degreeAngle)); // Shoot left
         Rigidbody2D rbLeft = bulletLeft.GetComponent<Rigidbody2D>();
-        rbLeft.AddForce(new Vector2(-ycomponent, xcomponent), ForceMode2D.Impulse);
+        rbLeft.AddForce(new Vector2(-ycomponent, xcomponent), ForceMode2D.Impulse); // rb.AddForce(Vector3.up * bulletForce, ForceMode2D.Impulse)
     }
 
     IEnumerator StageFiveDelayEachShot() // This function handles the delaying between each shots 
@@ -265,6 +301,8 @@ public class ShootBullets : MonoBehaviour
 
     void StageFiveBullet(float force, float angle, float outerAngle) // | STAGE FIVE EVOLUTION
     {
+        GameObject effect = Instantiate(secondFireEffect, firePointFirstSecondEvolution.position, Quaternion.identity);
+        Destroy(effect, 0.5f);
         GameObject bullet = Instantiate(secondEvolutionBullet, firePointFirstSecondEvolution.position, Quaternion.identity); // Shoot straight
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(Vector2.up * bulletForce, ForceMode2D.Impulse);
@@ -274,17 +312,29 @@ public class ShootBullets : MonoBehaviour
         float outerxcomponent = Mathf.Cos(outerAngle * Mathf.PI / 180) * force;
         float outerycomponent = Mathf.Sin(outerAngle * Mathf.PI / 180) * force;
 
+        GameObject effectRight = Instantiate(secondFireEffect, firePointThirdEvolutionRight.position, Quaternion.Euler(0f, 0f, -degreeAngle));
+        Destroy(effectRight, 0.5f);
+
         GameObject bulletRight = Instantiate(secondEvolutionBullet, firePointThirdEvolutionRight.position, Quaternion.Euler(0f, 0f, -degreeAngle)); // Shoot right
         Rigidbody2D rbRight = bulletRight.GetComponent<Rigidbody2D>();
         rbRight.AddForce(new Vector2(ycomponent, xcomponent), ForceMode2D.Impulse);
+
+        GameObject effectLeft = Instantiate(secondFireEffect, firePointThirdEvolutionLeft.position, Quaternion.Euler(0f, 0f, degreeAngle));
+        Destroy(effectLeft, 0.5f);
 
         GameObject bulletLeft = Instantiate(secondEvolutionBullet, firePointThirdEvolutionLeft.position, Quaternion.Euler(0f, 0f, degreeAngle)); // Shoot left
         Rigidbody2D rbLeft = bulletLeft.GetComponent<Rigidbody2D>();
         rbLeft.AddForce(new Vector2(-ycomponent, xcomponent), ForceMode2D.Impulse);
 
+        GameObject effectOuterRight = Instantiate(secondFireEffect, firePointThirdEvolutionFarRight.position, Quaternion.Euler(0f, 0f, -outerAngle));
+        Destroy(effectOuterRight, 0.5f);
+
         GameObject bulletFarRight = Instantiate(secondEvolutionBullet, firePointThirdEvolutionFarRight.position, Quaternion.Euler(0f, 0f, -outerAngle)); // Shoot right 
         Rigidbody2D rbFarRight = bulletFarRight.GetComponent<Rigidbody2D>();
         rbFarRight.AddForce(new Vector2(outerycomponent, outerxcomponent), ForceMode2D.Impulse);
+
+        GameObject effectOuterLeft = Instantiate(secondFireEffect, firePointThirdEvolutionFarLeft.position, Quaternion.Euler(0f, 0f, outerAngle));
+        Destroy(effectOuterLeft, 0.5f);
 
         GameObject bulletFarLeft = Instantiate(secondEvolutionBullet, firePointThirdEvolutionFarLeft.position, Quaternion.Euler(0f, 0f, outerAngle)); // Shoot left
         Rigidbody2D rbFarLeft = bulletFarLeft.GetComponent<Rigidbody2D>();
