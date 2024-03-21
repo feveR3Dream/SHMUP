@@ -2,30 +2,36 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MoveDown : MonoBehaviour
 {
-    public float speed;
+    public float speedDown;
+    public float speedSides;
+    public float desiredTime;
+
+    float time; // Creating a timer
+
     public GameObject cube;
 
-    public float time;
+    bool turnDir;
 
     void Start()
     {
-        while (true)
-        {
-            StartCoroutine(MoveZigzag());
-        }                                                           
+        turnDir = true;
     }
 
-    IEnumerator MoveZigzag()
+    void Update()
     {
-        Vector2 movementRight = (Vector2)cube.transform.position + new Vector2(speed * Time.deltaTime, -speed * Time.deltaTime); // Use these method to code the movement of anything 
-        cube.transform.position = movementRight;
+        time+= Time.deltaTime;
 
-        yield return new WaitForSeconds(time);
+        if (time >= desiredTime)
+        {
+            turnDir = !turnDir;
+            time = 0;
+        }
 
-        Vector2 movementLeft = (Vector2)cube.transform.position + new Vector2(-speed * Time.deltaTime, -speed * Time.deltaTime); // Use these method to code the movement of anything 
-        cube.transform.position = movementLeft;
+        Vector2 movement = new Vector2(turnDir ? -speedSides : speedSides, speedDown) * Time.deltaTime;
+        cube.transform.position = movement;
     }
 }
