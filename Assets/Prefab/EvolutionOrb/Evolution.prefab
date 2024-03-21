@@ -119,6 +119,7 @@ MonoBehaviour:
   maxSizeY: 0
   minSizeX: 0.33
   minSizeY: 0.33
+  moveSpeed: 2
 --- !u!58 &2336644762542706920
 CircleCollider2D:
   m_ObjectHideFlags: 0

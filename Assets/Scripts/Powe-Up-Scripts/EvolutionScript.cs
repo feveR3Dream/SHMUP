@@ -12,6 +12,7 @@ public class EvolutionScript : MonoBehaviour
     [SerializeField] float maxSizeY;
     [SerializeField] float minSizeX = 0.33f;
     [SerializeField] float minSizeY = 0.33f;
+    [SerializeField] float moveSpeed = 1.5f;
 
     GameObject findPlayer;
     ShootBullets evolutionStage;
@@ -39,6 +40,9 @@ public class EvolutionScript : MonoBehaviour
 
     void Update()
     {
+        Vector2 moveDown = (Vector2)transform.position + new Vector2(0f, -moveSpeed * Time.deltaTime);
+        transform.position = moveDown;
+
         if (findPlayer != null && evolutionStage != null)
         {
             distanceToPlayer = Vector2.Distance(transform.position, findPlayer.transform.position);
@@ -51,8 +55,8 @@ public class EvolutionScript : MonoBehaviour
 
                 transform.localScale = new Vector2(targetSizeX, targetSizeY);
             }      
-        }
-        
+        } 
+        Destroy(gameObject, 15f);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
