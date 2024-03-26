@@ -8,7 +8,8 @@ public class BasicShootingPhaseOne : MonoBehaviour
     [SerializeField] GameObject basicBullet;
 
     [SerializeField] float bulletForce = 5f;
-    [SerializeField] float timeBetweenShot = 0.75f;
+    [SerializeField] float resetRandomShot = 0.75f;
+    [SerializeField] int rngNumber = 3;
 
     bool canShoot = true;
 
@@ -35,8 +36,15 @@ public class BasicShootingPhaseOne : MonoBehaviour
     IEnumerator ShootFunction()
     {
         canShoot = false;
-        ShootWithDelay();
-        yield return new WaitForSeconds(timeBetweenShot);
+
+        int randomNumber = Random.Range(1, rngNumber + 1);
+
+        if (randomNumber ==  rngNumber)
+        {
+            ShootWithDelay();
+        }
+
+        yield return new WaitForSeconds(resetRandomShot);
         canShoot = true;
     }
 }

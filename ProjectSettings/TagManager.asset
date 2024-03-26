@@ -22,8 +22,8 @@ TagManager:
   - EvolutionOrb
   - Enemy
   - EnemyBullet
-  - 
-  - 
+  - InteractiveBox
+  - Wall
   - 
   - 
   - 
