@@ -234,7 +234,7 @@ Transform:
   m_GameObject: {fileID: 5391727}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -50, y: 10, z: 0}
+  m_LocalPosition: {x: -50, y: 7.96, z: 0}
   m_LocalScale: {x: 13.855421, y: 4.290306, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -281,12 +281,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialTravelDistance: 2.5
   lerpDistance: 2
+  raycastDistance: 7
   initialSpeed: 5
   sideSpeed: 1
   lerpSpeed: 1
   initialDelayTime: 1
   movementDelayTime: 1
   radius: 7.5
+  rightLayerDetection:
+    serializedVersion: 2
+    m_Bits: 4096
+  leftLayerDetection:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!50 &5391733
 Rigidbody2D:
   serializedVersion: 4
@@ -324,7 +331,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -332,7 +339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -517,7 +524,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -525,7 +532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -626,7 +633,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -634,7 +641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -843,7 +850,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -851,7 +858,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -5950,7 +5957,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -5958,7 +5965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -6427,7 +6434,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -6435,7 +6442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -6536,7 +6543,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -6544,7 +6551,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -7096,7 +7103,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -7104,7 +7111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -12206,7 +12213,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -12214,7 +12221,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -12347,7 +12354,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -12355,7 +12362,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -12510,7 +12517,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -12518,7 +12525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -17712,7 +17719,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -17720,7 +17727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -17821,7 +17828,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -17829,7 +17836,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -18213,7 +18220,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -18221,7 +18228,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -18356,7 +18363,7 @@ GameObject:
   - component: {fileID: 1118347956}
   - component: {fileID: 1118347958}
   - component: {fileID: 1118347959}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: LeftWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18525,7 +18532,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -18533,7 +18540,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -19116,7 +19123,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -19124,7 +19131,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -19355,7 +19362,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -19363,7 +19370,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -19486,7 +19493,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -19494,7 +19501,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -19595,7 +19602,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -19603,7 +19610,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -19704,7 +19711,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -19712,7 +19719,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -20018,7 +20025,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -20026,7 +20033,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -20127,7 +20134,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -20135,7 +20142,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -20311,7 +20318,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -20319,7 +20326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -20453,7 +20460,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -20461,7 +20468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -20628,7 +20635,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -20636,7 +20643,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -20759,7 +20766,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -20767,7 +20774,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -21029,7 +21036,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: rngNumber
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: bulletForce
@@ -21037,7 +21044,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot

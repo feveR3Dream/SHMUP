@@ -23,8 +23,8 @@ TagManager:
   - Enemy
   - EnemyBullet
   - InteractiveBox
-  - Wall
-  - 
+  - RightWall
+  - LeftWall
   - 
   - 
   - 

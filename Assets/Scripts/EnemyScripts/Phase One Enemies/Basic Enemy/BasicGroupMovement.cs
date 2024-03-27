@@ -8,16 +8,22 @@ public class BasicGroupMovement : MonoBehaviour
     [SerializeField] float initialTravelDistance = 5f;
     //[SerializeField] float sideTravelDistances = 2f;
     [SerializeField] float lerpDistance = 2f;
+    [SerializeField] float raycastDistance = 5f;
     [SerializeField] float initialSpeed = 5f;
     [SerializeField] float sideSpeed = 1f;
-    [SerializeField] float lerpSpeed = 1f;
+    //[SerializeField] float lerpSpeed = 1f;
     [SerializeField] float initialDelayTime = 1f;
     [SerializeField] float movementDelayTime = 1f;
-    [SerializeField] float radius = 1f;
+    //[SerializeField] float radius = 1f;
+    [SerializeField] float duration;
 
+    [SerializeField] LayerMask rightLayerDetection;
+    [SerializeField] LayerMask leftLayerDetection;
 
     Vector2 downTargetPos;
+    Vector2 beforeLerpTargetPos;
     Vector2 lerpTargetPos;
+    Vector2 targetPos;
     //Vector2 rightTargetPos;
     //Vector2 leftTargetPos;
 
@@ -52,6 +58,7 @@ public class BasicGroupMovement : MonoBehaviour
         if (Vector2.Distance(transform.position, downTargetPos) < 0.01f)
         {
             arrived = true;
+            beforeLerpTargetPos = transform.position;
             lerpTargetPos = (Vector2)transform.position - Vector2.up * lerpDistance;
         }
         
@@ -60,14 +67,29 @@ public class BasicGroupMovement : MonoBehaviour
     IEnumerator DelaySideMovement()
     {
         yield return new WaitForSeconds(movementDelayTime);
-        
-        //transform.position = Vector2.Lerp(transform.position, lerpTargetPos, lerpSpeed * Time.deltaTime);
+
+        /*
+        float t = Mathf.PingPong(Time.time / duration, 1f);
+
+        targetPos = Vector2.Lerp(beforeLerpTargetPos, lerpTargetPos, t);
+
+        transform.position = targetPos;     
+        */
+
+        /*
+        else if (Vector2.Distance(transform.position, lerpTargetPos) < 0.01)
+        {
+            transform.position = Vector2.Lerp(transform.position, beforeLerpTargetPos, lerpSpeed * Time.deltaTime);
+            Debug.Log("Working");
+        }
+        */
 
         Vector3 movement = new Vector3(rightSide ? sideSpeed : -sideSpeed, 0f, 0f) * Time.deltaTime;
         transform.position += movement;
+        
     }
 
-    
+    /*
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
@@ -76,24 +98,22 @@ public class BasicGroupMovement : MonoBehaviour
             Debug.Log("Is it working?");
         }
     }
-    
+    */
 
     void CloseToWall()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius);
-        foreach (Collider2D collider in colliders)
+        RaycastHit2D hitWallRight = Physics2D.Raycast(transform.position, transform.right, raycastDistance, rightLayerDetection);
+        RaycastHit2D hitWallLeft = Physics2D.Raycast(transform.position, -transform.right, raycastDistance, leftLayerDetection);
+
+        if (hitWallRight.collider != null || hitWallLeft.collider != null)
         {
-            if (collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
-            {
-                rightSide = !rightSide;
-                Debug.Log("It worked");
-                break;
-            }
+            rightSide = !rightSide;
         }
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, radius);
+        Gizmos.DrawRay (transform.position, transform.right * raycastDistance);
+        Gizmos.DrawRay (transform.position, -transform.right * raycastDistance);
     }
 }
