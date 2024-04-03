@@ -15,6 +15,8 @@ public class Management : MonoBehaviour
     public bool canTakeDamage;
     public bool canSpawn;
 
+    bool spawnAllowed = false;
+
     float slowTime;
     float normalizeTime;
 
@@ -23,21 +25,12 @@ public class Management : MonoBehaviour
     [SerializeField] float desiredSlowSpeed;
     [SerializeField] float delayPhaseTime;
 
-    void Start()
-    {
-        canSpawn = false;
-    }
-
     void Update()
     {
-        if (playStatus.started)
+        if (playStatus.started && !spawnAllowed)
         {
-            canSpawn = true;
-            if (canSpawn)
-            {
-                StartCoroutine(PhaseOneGroup());
-            }
-                
+            spawnAllowed = true; // Instant
+            StartCoroutine(PhaseOneGroup());          
         }
 
         deathSlowDownGame();
@@ -46,8 +39,7 @@ public class Management : MonoBehaviour
     IEnumerator PhaseOneGroup()
     {
         yield return new WaitForSeconds(delayPhaseTime);
-        GameObject groupSpawned = Instantiate(phaseOneGroup, spawnPosition.position, Quaternion.identity);
-        canSpawn = false;
+        Instantiate(phaseOneGroup, spawnPosition.position, Quaternion.identity);
     }
 
     void PhaseOneBasicGroupSpawning()

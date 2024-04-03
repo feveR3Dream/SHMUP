@@ -5416,7 +5416,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5590646223811079477}
   - component: {fileID: 765783154526685796}
-  - component: {fileID: 2757813672845718484}
+  - component: {fileID: 2969468299436477584}
+  - component: {fileID: 8348621514659635574}
   m_Layer: 9
   m_Name: Phase1BasicEnemy
   m_TagString: Enemy
@@ -5455,10 +5456,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootDirection: {fileID: 1278275330876057112}
   basicBullet: {fileID: 2786493504766341160, guid: 7effe22181561d549a2864da2e75b6da, type: 3}
-  bulletForce: 10
-  timeBetweenShot: 1
+  bulletForce: 5
+  resetRandomShot: 0.25
+  rngNumber: 10
   fireEffect: {fileID: 4336925098695883325, guid: 7a88365a74a189a4cb8686f6d03f2c45, type: 3}
---- !u!114 &2757813672845718484
+--- !u!114 &2969468299436477584
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5467,14 +5469,56 @@ MonoBehaviour:
   m_GameObject: {fileID: 5597837698179204332}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f1de71760fcf194098822a4a66d4ac0, type: 3}
+  m_Script: {fileID: 11500000, guid: d9e91a250bb69d5498d2df88e3caf6f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedRotation: 10
-  speedForward: 2
-  desiredTime: 2
-  degreeAngleRight: 75
-  degreeAngleLeft: -75
+  deathEffect: {fileID: 4427576191601476146, guid: ce964742c7d21f742a388c00a72c9de4, type: 3}
+  health: 20
+--- !u!61 &8348621514659635574
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5597837698179204332}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0000654608, y: 0.06675443}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.66872656, y: 0.800304}
+  m_EdgeRadius: 0
 --- !u!1 &5935560621237439238
 GameObject:
   m_ObjectHideFlags: 0
