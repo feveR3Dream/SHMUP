@@ -32,7 +32,7 @@ public class MovingText : MonoBehaviour
             for (int j = 0; j < 4; ++j)
             {
                 var orig = verts[charInfo.vertexIndex + j];
-                verts[charInfo.vertexIndex + j] = orig + new Vector3(0, Mathf.Sin(Time.time * 2f + orig.x * 0.01f) * 5f, 0);
+                verts[charInfo.vertexIndex + j] = orig + new Vector3(0, Mathf.Sin(Time.unscaledTime * 2f + orig.x * 0.01f) * 5f, 0);
             }
         }
 

@@ -9,7 +9,7 @@ public class BasicShootingPhaseOne : MonoBehaviour
 
     [SerializeField] float bulletForce = 5f;
     [SerializeField] float resetRandomShot = 0.75f;
-    [SerializeField] int rngNumber = 3;
+    [SerializeField] int rngNumber = 10;
 
     bool canShoot = true;
 

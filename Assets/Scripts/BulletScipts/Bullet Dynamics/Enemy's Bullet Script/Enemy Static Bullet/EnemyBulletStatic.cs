@@ -15,6 +15,6 @@ public class EnemyBulletStatic : MonoBehaviour
 
     void Update()
     {
-        Destroy(gameObject, 4f);
+        Destroy(gameObject, 6f);
     }
 }
