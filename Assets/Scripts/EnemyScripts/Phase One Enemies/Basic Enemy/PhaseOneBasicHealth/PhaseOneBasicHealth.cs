@@ -6,14 +6,23 @@ public class PhaseOneBasicHealth : MonoBehaviour
 {
     [SerializeField] GameObject deathEffect;
     [SerializeField] int health = 20;
+
+    private Management damageAllow;
+
+    void Start()
+    {
+        damageAllow = FindObjectOfType<Management>();
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
-        
         if (collision.gameObject.layer == LayerMask.NameToLayer("Bullet"))
         {
-            health--;
+            if (damageAllow.canTakeDamage)
+            {   
+                health--;
+            }
         }
-
     }
 
     void Update()

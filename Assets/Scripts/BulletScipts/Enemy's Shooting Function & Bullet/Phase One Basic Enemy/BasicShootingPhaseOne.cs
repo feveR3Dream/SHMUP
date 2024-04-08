@@ -11,13 +11,20 @@ public class BasicShootingPhaseOne : MonoBehaviour
     [SerializeField] float resetRandomShot = 0.75f;
     [SerializeField] int rngNumber = 10;
 
+    private Management shootAllow;
+
     bool canShoot = true;
 
     public GameObject fireEffect;
 
+    void Start()
+    {
+        shootAllow = FindObjectOfType<Management>();
+    }
+
     void Update()
     {
-        if (canShoot)
+        if (canShoot && shootAllow.canShoot)
         {
             StartCoroutine(ShootFunction());
         }

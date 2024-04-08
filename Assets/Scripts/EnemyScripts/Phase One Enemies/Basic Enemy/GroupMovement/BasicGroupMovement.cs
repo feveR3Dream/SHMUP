@@ -9,12 +9,12 @@ public class BasicGroupMovement : MonoBehaviour
     [SerializeField] float sideSpeed = 1f;
     [SerializeField] float lerpSpeed = 1f;
     [SerializeField] float initialDelayTime = 1f;
-    [SerializeField] float movementDelayTime = 1f;
     [SerializeField] float duration;
     [SerializeField] LayerMask rightLayerDetection;
     [SerializeField] LayerMask leftLayerDetection;
     [SerializeField] Transform lerpPosition;
 
+    private Management moveAllow;
 
     Vector2 downTargetPos;
     Vector2 downLerpPos;
@@ -29,6 +29,7 @@ public class BasicGroupMovement : MonoBehaviour
 
     void Start()
     {
+        moveAllow = FindObjectOfType<Management>();
         arrived = false;
         downTargetPos = (Vector2)transform.position - Vector2.up * initialTravelDistance;
         downLerpPos = (Vector2)lerpPosition.position - Vector2.up * initialTravelDistance;
@@ -42,11 +43,11 @@ public class BasicGroupMovement : MonoBehaviour
         }
         else
         {
-            StartCoroutine(DelaySideMovement());
-            if (allowMovement)
+            if (moveAllow.canMove && allowMovement)
             {
                 SideMovement();
             }
+            
         }
         Floating();
         CloseToWall();
@@ -62,15 +63,9 @@ public class BasicGroupMovement : MonoBehaviour
         {
             arrived = true;
             initialLerpTargetPos = transform.position;
+            allowMovement = true;
         }
 
-    }
-
-    IEnumerator DelaySideMovement()
-    {
-        yield return new WaitForSeconds(movementDelayTime);
-
-        allowMovement = true;
     }
 
     void SideMovement()
