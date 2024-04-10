@@ -80,7 +80,7 @@ public class Management : MonoBehaviour
     {
         string stringScore = score.ToString("D14");
         scoreHolder.text = stringScore; // Pay close attention to this part. [Linked with TextWrite script]
-        textWriter.AddWriter(scoreHolder, scoreHolder.text, .05f);
+        textWriter.AddWriter(scoreHolder, scoreHolder.text, .05f, true);
     }
 
     void deathSlowDownGame()
