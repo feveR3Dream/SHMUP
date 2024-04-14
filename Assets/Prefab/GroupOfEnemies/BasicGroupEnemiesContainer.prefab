@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4068520606074297413}
   m_Layer: 0
   m_Name: BasicGroupEnemies
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,7 +131,6 @@ MonoBehaviour:
   sideSpeed: 0.5
   lerpSpeed: 3.75
   initialDelayTime: 1
-  movementDelayTime: 1
   duration: 0.5
   rightLayerDetection:
     serializedVersion: 2

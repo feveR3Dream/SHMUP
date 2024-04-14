@@ -3,19 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 public class ShootBullets : MonoBehaviour
 {
-    public Transform firePointFirstSecondEvolution; 
-    public Transform firePointThirdEvolutionLeft;
-    public Transform firePointThirdEvolutionRight;
-    public Transform firePointThirdEvolutionFarLeft;
-    public Transform firePointThirdEvolutionFarRight;
-    public GameObject firstEvolutionBullet;
-    public GameObject secondEvolutionBullet;
-    public GameObject firstFireEffect;
-    public GameObject secondFireEffect;
+    [Header("References")]
+    /* Transforms */
+    [SerializeField] Transform firePointFirstSecondEvolution;
+    [SerializeField] Transform firePointThirdEvolutionLeft;
+    [SerializeField] Transform firePointThirdEvolutionRight;
+    [SerializeField] Transform firePointThirdEvolutionFarLeft;
+    [SerializeField] Transform firePointThirdEvolutionFarRight;
+    /* GameObjects */
+    [SerializeField] GameObject firstEvolutionBullet;
+    [SerializeField] GameObject secondEvolutionBullet;
+    [SerializeField] GameObject firstFireEffect;
+    [SerializeField] GameObject secondFireEffect;
+    /* LayerMasks */
+    [SerializeField] LayerMask detectionLayer;
+    [SerializeField] LayerMask detectionLayerSecond;
 
+
+    [Header("Scripts")]
     [SerializeField] PlayerKeyboardMovement PKM;
     [SerializeField] PlayOption playStatus;
 
+
+    [Header("Values")]
+    /* Floats and Ints */
     [SerializeField] float bulletForce = 20f; // Bullet travelling speed
     [SerializeField] float timeBetweenShot = 0.5f; // Rate of fire
     [SerializeField] float maxDistance = 2f; // RayCasting distance (from the player ---> enemy)
@@ -27,20 +38,17 @@ public class ShootBullets : MonoBehaviour
     [SerializeField] float maxOuterDegreeAngle = 30f;
     [SerializeField] int evolutionCounter = 1;
     [SerializeField] float duration = 1f; // Duration of bullet spreading in and out (measure in unit of second)
-
-    [SerializeField] LayerMask detectionLayer;
-    [SerializeField] LayerMask detectionLayerSecond;
-
+    private float currentFireRate;
+    /* Booleans */
     public bool evoStageOne;
     public bool evoStageTwo;
     public bool evoStageThree;
     public bool evoStageFour;
     public bool evoStageFive;
+    private bool canShoot = true;
+    private bool increasing;
+    private bool outerIncreasing;
 
-    float currentFireRate;
-    bool canShoot = true;
-    bool increasing;
-    bool outerIncreasing;
 
     void Start()
     {
@@ -213,8 +221,6 @@ public class ShootBullets : MonoBehaviour
         canShoot = true;
     }
 
-    // Make bullet effect for stage three bullet evolution onwards! [PLEASE REMEMBER THIS SHIT TOMORROWWWWWW]
-
     void StageThreeBullet(float force, float angle, float outerAngle) // | STAGE THREE EVOLUTION
     {
         GameObject effect = Instantiate(secondFireEffect, firePointFirstSecondEvolution.position, Quaternion.identity);
@@ -245,14 +251,14 @@ public class ShootBullets : MonoBehaviour
         GameObject effectOuterRight = Instantiate(firstFireEffect, firePointThirdEvolutionFarRight.position, Quaternion.Euler(0f, 0f, -outerAngle));
         Destroy(effectOuterRight, 0.5f);
 
-        GameObject bulletFarRight = Instantiate(firstEvolutionBullet, firePointThirdEvolutionFarRight.position, Quaternion.Euler(0f, 0f, -outerAngle)); // Shoot right 
+        GameObject bulletFarRight = Instantiate(firstEvolutionBullet, firePointThirdEvolutionFarRight.position, Quaternion.Euler(0f, 0f, -outerAngle)); // Shoot far right 
         Rigidbody2D rbFarRight = bulletFarRight.GetComponent<Rigidbody2D>();
         rbFarRight.AddForce(new Vector2(outerycomponent, outerxcomponent), ForceMode2D.Impulse);
 
         GameObject effectOuterLeft = Instantiate(firstFireEffect, firePointThirdEvolutionFarLeft.position, Quaternion.Euler(0f, 0f, outerAngle));
         Destroy(effectOuterLeft, 0.5f);
 
-        GameObject bulletFarLeft = Instantiate(firstEvolutionBullet, firePointThirdEvolutionFarLeft.position, Quaternion.Euler(0f, 0f, outerAngle)); // Shoot left
+        GameObject bulletFarLeft = Instantiate(firstEvolutionBullet, firePointThirdEvolutionFarLeft.position, Quaternion.Euler(0f, 0f, outerAngle)); // Shoot far left
         Rigidbody2D rbFarLeft = bulletFarLeft.GetComponent<Rigidbody2D>();
         rbFarLeft.AddForce(new Vector2(-outerycomponent, outerxcomponent), ForceMode2D.Impulse);
     }
@@ -329,14 +335,14 @@ public class ShootBullets : MonoBehaviour
         GameObject effectOuterRight = Instantiate(secondFireEffect, firePointThirdEvolutionFarRight.position, Quaternion.Euler(0f, 0f, -outerAngle));
         Destroy(effectOuterRight, 0.5f);
 
-        GameObject bulletFarRight = Instantiate(secondEvolutionBullet, firePointThirdEvolutionFarRight.position, Quaternion.Euler(0f, 0f, -outerAngle)); // Shoot right 
+        GameObject bulletFarRight = Instantiate(secondEvolutionBullet, firePointThirdEvolutionFarRight.position, Quaternion.Euler(0f, 0f, -outerAngle)); // Shoot far right 
         Rigidbody2D rbFarRight = bulletFarRight.GetComponent<Rigidbody2D>();
         rbFarRight.AddForce(new Vector2(outerycomponent, outerxcomponent), ForceMode2D.Impulse);
 
         GameObject effectOuterLeft = Instantiate(secondFireEffect, firePointThirdEvolutionFarLeft.position, Quaternion.Euler(0f, 0f, outerAngle));
         Destroy(effectOuterLeft, 0.5f);
 
-        GameObject bulletFarLeft = Instantiate(secondEvolutionBullet, firePointThirdEvolutionFarLeft.position, Quaternion.Euler(0f, 0f, outerAngle)); // Shoot left
+        GameObject bulletFarLeft = Instantiate(secondEvolutionBullet, firePointThirdEvolutionFarLeft.position, Quaternion.Euler(0f, 0f, outerAngle)); // Shoot far left
         Rigidbody2D rbFarLeft = bulletFarLeft.GetComponent<Rigidbody2D>();
         rbFarLeft.AddForce(new Vector2(-outerycomponent, outerxcomponent), ForceMode2D.Impulse);
     }
@@ -346,9 +352,9 @@ public class ShootBullets : MonoBehaviour
         yield return new WaitForSeconds(PKM.delayInitial);
         RaycastHit2D hitObstacle = Physics2D.Raycast(transform.position, transform.up, maxDistance, detectionLayer); // Raycast takes in original position, target direction, distance and layer
         RaycastHit2D hitEnemy = Physics2D.Raycast(transform.position, transform.up, maxDistance, detectionLayerSecond);
-        if (hitObstacle.collider != null || hitEnemy.collider != null)
+        if (hitObstacle.collider != null || hitEnemy.collider != null) // If the player is near an enemy or an obstacle, the fire rate will increase by two times! => Challenge the player to get close to danger.
         {
-            currentFireRate = timeBetweenShot / 2;
+            currentFireRate = timeBetweenShot / 2; 
         }
         else
         {

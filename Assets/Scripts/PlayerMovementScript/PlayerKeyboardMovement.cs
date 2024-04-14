@@ -3,24 +3,29 @@ using UnityEngine;
 
 public class PlayerKeyboardMovement : MonoBehaviour
 {
+    [Header("References")]
+    /* Cameras */
     [SerializeField] Camera cam;
+
+
+    [Header("Values")]
+    /* Floats and Ints */
     [SerializeField] float rotationSpeed = 5.0f;
     [SerializeField] float rotateLimit = 45.0f;
     [SerializeField] float normalizedSpeed = 2f;
     [SerializeField] float minX = 0.25f;
     [SerializeField] float maxX = 0.75f;
-    //[SerializeField] float clampingRange = 0.25f;
-
-
-    float xMovement;
-    float yMovement;
-
-    private PlayOption playStatus;
-
+    private float xMovement;
+    private float yMovement;
+    public float delayInitial = 1f;
+    /* Booleans */
+    bool delayComplete = false;
+    /* Vectors */
     Vector2 moveDir;
 
-    public float delayInitial = 1f;
-    bool delayComplete = false;
+
+    [Header("Scripts")]
+    private PlayOption playStatus;
 
     void Start()
     {

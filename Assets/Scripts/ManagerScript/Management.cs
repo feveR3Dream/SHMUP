@@ -6,35 +6,46 @@ using TMPro;
 
 public class Management : MonoBehaviour
 {
+    [Header("Scripts")]
     [SerializeField] PlayOption playStatus;
     [SerializeField] Health playerDead;
     [SerializeField] BackToMenu restartStatus;
-    [SerializeField] Transform spawnPosition; 
-
-    [SerializeField] GameObject phaseOneGroup;
-
-    [SerializeField] TextMeshProUGUI scoreHolder;
-
     [SerializeField] TextWriter textWriter;
 
-    public bool canShoot;
-    public bool canMove;
-    public bool canTakeDamage;
-    public bool canSpawn;
 
-    bool spawnAllowed = false;
-    bool scoreSpawn = false;
+    [Header("References")]
+    /* Transforms */
+    [SerializeField] Transform spawnPosition;
+    [SerializeField] Transform scoreTextLerpPos;
+    /* GameObjects */
+    [SerializeField] GameObject phaseOneGroup;
+    /* TextMeshProUGUI */
+    [SerializeField] TextMeshProUGUI scoreHolder;
+    [SerializeField] TextMeshProUGUI scoreText;
 
-    float slowTime;
-    float normalizeTime;
-    int score;
 
+    [Header("Values")]
+    /* Floats and Ints */
     [SerializeField] float slowDownSpeed;
     [SerializeField] float normalizeSpeed;
     [SerializeField] float desiredSlowSpeed;
     [SerializeField] float delayPhaseTime;
     [SerializeField] float delayShootTime;
-    [SerializeField] float textAppear;
+    [SerializeField] float textAppearTime;
+    [SerializeField] float textAppearSpeed;
+    [SerializeField] float updateScoreSpeed;
+
+    private float slowTime;
+    private float normalizeTime;
+    public int score;
+    public int newUpdatedScore;
+    /* Booleans */
+    public bool canShoot;
+    public bool canMove;
+    public bool canTakeDamage;
+    public bool canSpawn;
+    private bool spawnAllowed = false;
+    private bool scoreSpawn = false;
 
     void Start()
     {
@@ -48,7 +59,8 @@ public class Management : MonoBehaviour
     {
         if (playStatus.started && !spawnAllowed)
         {
-            spawnAllowed = true;     
+            spawnAllowed = true;
+            StartCoroutine(ScoreTextSpawn());
             StartCoroutine(PhaseOneGroup());
             if (!scoreSpawn)
             {
@@ -57,6 +69,19 @@ public class Management : MonoBehaviour
             }
         }
         deathSlowDownGame();
+    }
+
+    IEnumerator ScoreTextSpawn()
+    {
+        yield return new WaitForSeconds(0.01f);
+        float elapsedTime = 0f;
+        while (elapsedTime < 1f)
+        {
+            float t = elapsedTime / textAppearSpeed;
+            scoreText.transform.position = Vector2.Lerp(scoreText.transform.position, scoreTextLerpPos.position, t);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
     }
 
     IEnumerator PhaseOneGroup()
@@ -71,8 +96,34 @@ public class Management : MonoBehaviour
 
     IEnumerator DelayScoreUpdate()
     {
-        yield return new WaitForSeconds(textAppear);
+        yield return new WaitForSeconds(textAppearTime);
         scoreHolder.gameObject.SetActive(true);
+        UpdateScoreText();
+    }
+
+    IEnumerator UpdateScoreTextSmoothly(int newScore)
+    {
+        int oldScore = score;
+        for (int i = oldScore; i <= newScore; i += 5)
+        {
+            score = i;          
+            string stringScore = score.ToString("D14");
+            scoreHolder.text = stringScore;
+            textWriter.AddWriter(scoreHolder, scoreHolder.text, 0f, true);
+            
+            yield return new WaitForSeconds(0.1f / updateScoreSpeed);
+        }
+    }
+
+    public void UpdateScoreSmoothly(int amount)
+    {
+        newUpdatedScore += amount;
+        StartCoroutine(UpdateScoreTextSmoothly(newUpdatedScore));
+    }
+
+    public void UpdateScore(int amount)
+    {
+        score += amount;
         UpdateScoreText();
     }
 

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AoeShootingPhaseOne : MonoBehaviour
 {
-    public GameObject enemyBullet;
-    public Transform shootingPosition;
+    [Header("Values")]
+    /* Floats and Ints */
     public float bulletForce = 1f;
     public float timeBetweenShot = 2f;
     public float spinSpeed = 50f;
@@ -25,6 +25,16 @@ public class AoeShootingPhaseOne : MonoBehaviour
     [SerializeField] float degreeAngleDown;
     [SerializeField] float degreeAngleDownRight;
     [SerializeField] float degreeAngleDownLeft;
+
+
+    [Header("References")]
+    /* GameObjects */
+    public GameObject enemyBullet;
+    /* Transforms */
+    public Transform shootingPosition;
+    
+
+    
 
     void Start()
     {

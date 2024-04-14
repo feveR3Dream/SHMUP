@@ -4,18 +4,25 @@ using UnityEngine;
 
 public class BasicShootingPhaseOne : MonoBehaviour
 {
+    [Header("References")]
+    /* Transforms */
     [SerializeField] Transform shootDirection;
+    /* GameObjects */
     [SerializeField] GameObject basicBullet;
+    [SerializeField] GameObject fireEffect;
 
+
+    [Header("Values")]
+    /* Floats and Ints */
     [SerializeField] float bulletForce = 5f;
     [SerializeField] float resetRandomShot = 0.75f;
     [SerializeField] int rngNumber = 10;
-
-    private Management shootAllow;
-
+    /* Booleans */ 
     bool canShoot = true;
 
-    public GameObject fireEffect;
+
+    [Header("Scripts")]
+    private Management shootAllow;
 
     void Start()
     {

@@ -3,29 +3,39 @@ using UnityEngine;
 
 public class BasicGroupMovement : MonoBehaviour
 {
-    [SerializeField] float initialTravelDistance = 5f;
-    [SerializeField] float raycastDistance = 5f;
-    [SerializeField] float initialSpeed = 5f;
-    [SerializeField] float sideSpeed = 1f;
-    [SerializeField] float lerpSpeed = 1f;
-    [SerializeField] float initialDelayTime = 1f;
-    [SerializeField] float duration;
+    [Header("Values")] // Will need to put away all of the [SerializeField] once everything is settled
+    /* Floats and Ints */
+    [SerializeField] float initialTravelDistance = 5f; /* Responsible for [1] */
+    [SerializeField] float raycastDistance = 5f; /* Responsible for checking the distance of the enemy group from the wall */
+    [SerializeField] float initialSpeed = 5f; /* Responsible for [1] */
+    [SerializeField] float sideSpeed = 1f; /* Horizontal movement speed */ 
+    [SerializeField] float lerpSpeed = 1f; /* Vertical movement speed */
+    [SerializeField] float initialDelayTime = 1f; /* [1] How much time before entering the camera frame */ 
+    [SerializeField] float duration; /* How much time before switching direction vertically */
+    [SerializeField] float time; /* Timer, increase by a Time.deltaTime amount */
+
+
+    [Header("References")]
+    /* LayerMasks */
     [SerializeField] LayerMask rightLayerDetection;
     [SerializeField] LayerMask leftLayerDetection;
+    /* Transforms */
     [SerializeField] Transform lerpPosition;
-
-    private Management moveAllow;
-
+    /* Vectors */
     Vector2 downTargetPos;
     Vector2 downLerpPos;
     Vector2 initialLerpTargetPos;
 
+
+    [Header("Script")]
+    private Management moveAllow;
+
+
+    [Header("Booleans")]
     bool arrived;
     bool rightSide = false;
     bool upSide = false;
     bool allowMovement = false;
-
-    [SerializeField] float time;
 
     void Start()
     {
@@ -49,7 +59,7 @@ public class BasicGroupMovement : MonoBehaviour
             }
             
         }
-        Floating();
+        FloatingEffect();
         CloseToWall();
     }
 
@@ -106,7 +116,7 @@ public class BasicGroupMovement : MonoBehaviour
 
     }
 
-    void Floating()
+    void FloatingEffect()
     {
         if (time >= duration && allowMovement)
         {

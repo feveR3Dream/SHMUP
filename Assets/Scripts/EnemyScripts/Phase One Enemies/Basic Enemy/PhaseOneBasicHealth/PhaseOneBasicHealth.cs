@@ -4,21 +4,26 @@ using UnityEngine;
 
 public class PhaseOneBasicHealth : MonoBehaviour
 {
+    [Header("References")]
+    /* GameObjects */
     [SerializeField] GameObject deathEffect;
+
+    [Header("Values")]
+    /* Floats and Ints */
     [SerializeField] int health = 20;
 
-    private Management damageAllow;
+    private Management manager;
 
     void Start()
     {
-        damageAllow = FindObjectOfType<Management>();
+        manager = FindObjectOfType<Management>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Bullet"))
         {
-            if (damageAllow.canTakeDamage)
+            if (manager.canTakeDamage)
             {   
                 health--;
             }
@@ -29,6 +34,7 @@ public class PhaseOneBasicHealth : MonoBehaviour
     {
         if (health < 1)
         {
+            manager.UpdateScoreSmoothly(100);
             GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
             Destroy(effect, 2f);
             Destroy(gameObject);

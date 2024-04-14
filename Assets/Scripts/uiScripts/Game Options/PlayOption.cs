@@ -6,12 +6,21 @@ using UnityEngine.UI;
 
 public class PlayOption : MonoBehaviour
 {
+    [Header("Values")]
     public bool started; // Main Ui |enable|disable| variable.
+
+
+    [Header("References")]
+    /* Buttons */
     [SerializeField] Button playButton;
-    [SerializeField] Health deadStatus;
+    /* GameObjects */
     [SerializeField] GameObject starEffectOne;
     [SerializeField] GameObject starEffectTwo;
     [SerializeField] GameObject starEffectThree;
+
+
+    [Header("Scripts")]
+    [SerializeField] Health deadStatus;
 
     void Start()
     {

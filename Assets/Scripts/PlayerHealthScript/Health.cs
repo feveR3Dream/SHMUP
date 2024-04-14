@@ -5,11 +5,19 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    [Header("References")]
+    /* GameObjects */
     [SerializeField] GameObject deathEffect;
     [SerializeField] GameObject spawnEffect;
     [SerializeField] GameObject player;
 
+
+    [Header("Scripts")]
     private BackToMenu restart;
+
+
+    [Header("Values")]
+    /* Booleans */
     public bool dead; 
 
     void Start()

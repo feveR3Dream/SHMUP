@@ -7,17 +7,20 @@ using UnityEngine.Rendering.UI;
 
 public class MoveDown : MonoBehaviour
 {
+    [Header("Values")]
+    /* Floats and Ints */
     public float speedRotation; 
     //public float speedForward;
     public float desiredTime;
     public float degreeAngleRight;
     public float degreeAngleLeft;
-
-
-    float time; // Creating a timer
-
+    private float time; // Creating a timer
+    /* Booleans */
     bool turnRight;
 
+
+    [Header("References")]
+    /* Quaternions */
     Quaternion right;
     Quaternion left;
 

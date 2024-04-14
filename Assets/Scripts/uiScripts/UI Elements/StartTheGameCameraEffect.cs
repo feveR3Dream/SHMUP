@@ -3,13 +3,17 @@ using UnityEngine;
 
 public class StartTheGameCameraEffect : MonoBehaviour
 {
+    [Header("Scripts")]
     [SerializeField] Camera mainCamera;
     [SerializeField] PlayOption playStatus;
-    [SerializeField] float targetOrthographicSize = 5f;
-    [SerializeField] float zoomSpeed = 1f;
     [SerializeField] Health deadStatus;
 
+
+    [Header("Values")]
+    /* Floats and Ints */
     private float initialOrthographicSize;
+    [SerializeField] float targetOrthographicSize = 5f;
+    [SerializeField] float zoomSpeed = 1f;
 
     void Start()
     {

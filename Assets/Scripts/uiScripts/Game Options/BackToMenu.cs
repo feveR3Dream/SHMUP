@@ -5,11 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class BackToMenu : MonoBehaviour
 {
+    [Header("References")]
+    /* TextMeshPro */
     [SerializeField] TextMeshProUGUI ruh;
     [SerializeField] TextMeshProUGUI backToMenuText;
+    /* Buttons */
     [SerializeField] Button B;
 
+
+    [Header("Scripts")]
     private Health deadStatus;
+
+
+    [Header("Values")]
+    /* Booleans */
     public bool startAgain;
     private bool appeared;
 

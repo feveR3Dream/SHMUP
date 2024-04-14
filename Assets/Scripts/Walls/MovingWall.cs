@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class MovingWall : MonoBehaviour
 {
+    [Header("References")]
+    /* Trasnforms */ 
     [SerializeField] Transform targetPosition;
+
+
+    [Header("Values")]
+    /* Floats and Ints */
     [SerializeField] float speed = 2f;
-
-    private PlayOption playStatus;
-
+    /* Booleans */
     private bool moved;
+
+
+    [Header("Scripts")]
+    private PlayOption playStatus;
 
     void Start()
     {

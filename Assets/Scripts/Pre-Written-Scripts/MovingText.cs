@@ -5,15 +5,18 @@ using TMPro;
 
 public class MovingText : MonoBehaviour
 {
-    public TMP_Text textComponent;
+    [Header("UI")]
+    [SerializeField] TMP_Text textComponent;
+
+
+    [Header("Values")]
     [SerializeField] float waitTime = 0.25f;
-    // Start is called before the first frame update
+
     void Start()
     {
         StartCoroutine(waitSecond());
     }
 
-    // Update is called once per frame
     void Update()
     {
         textComponent.ForceMeshUpdate();

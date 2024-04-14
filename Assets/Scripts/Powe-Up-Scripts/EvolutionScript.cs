@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class EvolutionScript : MonoBehaviour
 {
+    [Header("Values")]
+    /* Floats and Ints */
     [SerializeField] float distanceToPlayer; // This part is Serialized to see if the distance checking system works or not.
     [SerializeField] float lerpToPlayerSpeed = 10f;
     [SerializeField] float maxSizeX;
@@ -14,7 +16,13 @@ public class EvolutionScript : MonoBehaviour
     [SerializeField] float minSizeY = 0.33f;
     [SerializeField] float moveSpeed = 1.5f;
 
+
+    [Header("References")]
+    /* GameObjects */
     GameObject findPlayer;
+
+
+    [Header("Scripts")]
     ShootBullets evolutionStage;
 
     void Start()

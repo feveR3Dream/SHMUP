@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class EnemyBulletSpinning : MonoBehaviour
 {
-    public GameObject hitEffect;
-    public float spinVelocity = 10f;
+    [Header("References")]
+    /* GameObjects */
+    [SerializeField] GameObject hitEffect;
+
+
+    [Header("Values")]
+    /* Floats and Ints */
+    [SerializeField] float spinVelocity = 10f;
 
     void Start()
     {

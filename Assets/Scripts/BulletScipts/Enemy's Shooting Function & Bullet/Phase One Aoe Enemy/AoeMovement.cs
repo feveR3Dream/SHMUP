@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AoeMovement : MonoBehaviour
 {
+    [Header("Values")]
+    /* Floats and Ints */
     public float spinVelocity = 10f;
 
     void Start()

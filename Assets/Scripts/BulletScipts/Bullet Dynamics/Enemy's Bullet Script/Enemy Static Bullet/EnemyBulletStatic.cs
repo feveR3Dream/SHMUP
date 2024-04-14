@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class EnemyBulletStatic : MonoBehaviour
 {
-    public GameObject hitEffect;
+    [Header("References")]
+    /* GameObjects */
+    [SerializeField] GameObject hitEffect;
 
     void OnCollisionEnter2D(Collision2D collision)
     {

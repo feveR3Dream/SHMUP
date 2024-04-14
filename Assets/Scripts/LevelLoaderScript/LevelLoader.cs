@@ -5,8 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
-    private BackToMenu restart;
+    [Header("References")]
+    /* Animators */
     public Animator transition;
+
+
+    [Header("Scripts")]
+    private BackToMenu restart;
+    
+
+    [Header("Values")]
+    /* Floats and Ints */
     public float transitionTime = 1f;
 
     void Start()
