@@ -22,11 +22,11 @@ public class BasicShootingPhaseOne : MonoBehaviour
 
 
     [Header("Scripts")]
-    private Management shootAllow;
+    private EnemyPhaseManager shootAllow;
 
     void Start()
     {
-        shootAllow = FindObjectOfType<Management>();
+        shootAllow = FindObjectOfType<EnemyPhaseManager>();
     }
 
     void Update()

@@ -132,6 +132,8 @@ MonoBehaviour:
   lerpSpeed: 3.75
   initialDelayTime: 1
   duration: 0.5
+  time: 0
+  basicEnemiesCount: 0
   rightLayerDetection:
     serializedVersion: 2
     m_Bits: 4096
@@ -139,7 +141,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8192
   lerpPosition: {fileID: 7331042208544986123}
-  time: 0
+  enemiesContainer: {fileID: 493974862502031437}
+  groupContainer: {fileID: 4697575202294061727}
+  nextPhase: 0
 --- !u!50 &4068520606074297413
 Rigidbody2D:
   serializedVersion: 4
@@ -249,7 +253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -277,7 +281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -384,7 +388,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -412,7 +416,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -519,7 +523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -547,7 +551,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -654,7 +658,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -682,7 +686,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -789,7 +793,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -817,7 +821,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -924,7 +928,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -952,7 +956,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -1059,7 +1063,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -1087,7 +1091,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -1194,7 +1198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -1222,7 +1226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -1329,7 +1333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -1357,7 +1361,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -1464,7 +1468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -1492,7 +1496,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -1599,7 +1603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -1627,7 +1631,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -1734,7 +1738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -1762,7 +1766,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -1869,7 +1873,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -1897,7 +1901,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -2004,7 +2008,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -2032,7 +2036,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -2139,7 +2143,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -2167,7 +2171,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -2274,7 +2278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -2302,7 +2306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -2409,7 +2413,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -2437,7 +2441,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -2544,7 +2548,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -2572,7 +2576,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -2679,7 +2683,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -2707,7 +2711,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -2814,7 +2818,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -2842,7 +2846,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -2949,7 +2953,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -2977,7 +2981,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -3084,7 +3088,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -3112,7 +3116,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -3219,7 +3223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -3247,7 +3251,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -3354,7 +3358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -3382,7 +3386,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -3489,7 +3493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -3517,7 +3521,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -3624,7 +3628,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -3652,7 +3656,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x
@@ -3759,7 +3763,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: resetRandomShot
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 765783154526685796, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: timeBetweenShot
@@ -3787,7 +3791,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969468299436477584, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: health
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5590646223811079477, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_LocalScale.x

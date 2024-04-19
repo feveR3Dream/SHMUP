@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BasicGroupMovement : MonoBehaviour
@@ -13,7 +15,7 @@ public class BasicGroupMovement : MonoBehaviour
     [SerializeField] float initialDelayTime = 1f; /* [1] How much time before entering the camera frame */ 
     [SerializeField] float duration; /* How much time before switching direction vertically */
     [SerializeField] float time; /* Timer, increase by a Time.deltaTime amount */
-
+    public int basicEnemiesCount = 0;
 
     [Header("References")]
     /* LayerMasks */
@@ -21,6 +23,9 @@ public class BasicGroupMovement : MonoBehaviour
     [SerializeField] LayerMask leftLayerDetection;
     /* Transforms */
     [SerializeField] Transform lerpPosition;
+    [SerializeField] Transform enemiesContainer;
+    /* GameObjects */
+    [SerializeField] GameObject groupContainer;
     /* Vectors */
     Vector2 downTargetPos;
     Vector2 downLerpPos;
@@ -28,21 +33,32 @@ public class BasicGroupMovement : MonoBehaviour
 
 
     [Header("Script")]
-    private Management moveAllow;
+    private EnemyPhaseManager enemyManage;
 
 
     [Header("Booleans")]
-    bool arrived;
-    bool rightSide = false;
-    bool upSide = false;
-    bool allowMovement = false;
+    private bool arrived;
+    private bool rightSide = false;
+    private bool upSide = false;
+    private bool allowMovement = false;
+    public bool nextPhase = false;
 
     void Start()
     {
-        moveAllow = FindObjectOfType<Management>();
+        enemyManage = FindObjectOfType<EnemyPhaseManager>();
         arrived = false;
         downTargetPos = (Vector2)transform.position - Vector2.up * initialTravelDistance;
         downLerpPos = (Vector2)lerpPosition.position - Vector2.up * initialTravelDistance;
+
+        //Transform enemiesContainer = transform.Find("BasicGroupEnemies");
+        if (enemiesContainer != null)
+        {
+            basicEnemiesCount = enemiesContainer.childCount;
+        }
+        else
+        {
+            Debug.Log("Could not find an enemiesContainer!");
+        }
     }
 
     void Update()
@@ -53,7 +69,7 @@ public class BasicGroupMovement : MonoBehaviour
         }
         else
         {
-            if (moveAllow.canMove && allowMovement)
+            if (enemyManage.canMove && allowMovement)
             {
                 SideMovement();
             }
@@ -61,6 +77,7 @@ public class BasicGroupMovement : MonoBehaviour
         }
         FloatingEffect();
         CloseToWall();
+        AllEnemyDied();
     }
 
     IEnumerator DelayInitialMovement()
@@ -75,7 +92,6 @@ public class BasicGroupMovement : MonoBehaviour
             initialLerpTargetPos = transform.position;
             allowMovement = true;
         }
-
     }
 
     void SideMovement()
@@ -122,6 +138,16 @@ public class BasicGroupMovement : MonoBehaviour
         {
             upSide = !upSide;
             time = 0;
+        }
+    }
+
+    void AllEnemyDied()
+    {
+        if (basicEnemiesCount <= 0)
+        {
+            enemyManage.newWave = true;
+            enemyManage.waveCounter++;
+            Destroy(groupContainer);
         }
     }
 

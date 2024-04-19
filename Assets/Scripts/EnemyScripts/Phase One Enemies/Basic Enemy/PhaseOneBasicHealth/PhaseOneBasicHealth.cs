@@ -8,22 +8,29 @@ public class PhaseOneBasicHealth : MonoBehaviour
     /* GameObjects */
     [SerializeField] GameObject deathEffect;
 
+
     [Header("Values")]
     /* Floats and Ints */
     [SerializeField] int health = 20;
 
-    private Management manager;
+
+    [Header("Scripts")]
+    private EnemyPhaseManager enemyManager;
+    private ScoreManager scoreManager;
+    private BasicGroupMovement enemyCounter;
 
     void Start()
     {
-        manager = FindObjectOfType<Management>();
+        enemyManager = FindObjectOfType<EnemyPhaseManager>();
+        scoreManager = FindObjectOfType<ScoreManager>();
+        enemyCounter = FindObjectOfType<BasicGroupMovement>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Bullet"))
         {
-            if (manager.canTakeDamage)
+            if (enemyManager.canTakeDamage)
             {   
                 health--;
             }
@@ -34,7 +41,8 @@ public class PhaseOneBasicHealth : MonoBehaviour
     {
         if (health < 1)
         {
-            manager.UpdateScoreSmoothly(100);
+            scoreManager.UpdateScoreSmoothly(100);
+            enemyCounter.basicEnemiesCount--;
             GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
             Destroy(effect, 2f);
             Destroy(gameObject);
