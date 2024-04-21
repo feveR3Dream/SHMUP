@@ -32,11 +32,11 @@ public class EnemyPhaseManager : MonoBehaviour
     private float normalizeTime;
     public int waveCounter = 1;
     /* Booleans */
-    public bool canShoot;
-    public bool canMove;
-    public bool canTakeDamage;
-    public bool canSpawn;    
-    public bool newWave;
+    public bool canShoot; // Enemy firing ability
+    public bool canMove; // Enemy movement ability
+    public bool canTakeDamage; // Enemy vulnarable state
+    public bool canSpawn; // Enemy spawn permission
+    public bool newWave; // A boolean value that control the game waves.
     private bool firstPhase;   // Wave 1 - 5
     private bool secondPhase; // Wave 6 - 10
     private bool thirdPhase; // Wave 11 - 15
@@ -91,7 +91,7 @@ public class EnemyPhaseManager : MonoBehaviour
         canMove = true;
     }
 
-    IEnumerator SpawnPhaseText() 
+    IEnumerator SpawnPhaseText() // Phase text flickering on and off until the next phase happens.
     {
         yield return new WaitForSeconds(0.25f);
         phaseText.gameObject.SetActive(true);
@@ -128,11 +128,12 @@ public class EnemyPhaseManager : MonoBehaviour
         }
     }
 
-    void PhaseTextSpawner() // Initiated after the game has been started.
+    IEnumerator PhaseTextSpawner() // Initiated after the game has been started.
     {
         if (playStatus.started && !phaseTextSpawn)
         {
             phaseTextSpawn = true;
+            yield return new WaitForSeconds(1.5f);
             StartCoroutine(SpawnPhaseText());
         }
     } 
@@ -143,7 +144,7 @@ public class EnemyPhaseManager : MonoBehaviour
         {
             if (!canSpawn)
             {
-                PhaseTextSpawner();
+                StartCoroutine(PhaseTextSpawner());
             }
 
             if (canSpawn)
@@ -160,7 +161,7 @@ public class EnemyPhaseManager : MonoBehaviour
         {
             if (!canSpawn)
             {
-                PhaseTextSpawner();
+                StartCoroutine(PhaseTextSpawner());
             }
 
         }
