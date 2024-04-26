@@ -29,7 +29,7 @@ public class PlayerKeyboardMovement : MonoBehaviour
 
     void Start()
     {
-        GameObject playButton = GameObject.Find("Play Button");
+        GameObject playButton = GameObject.Find("Canvas");
         if (playButton != null )
         {
             playStatus = playButton.GetComponent<PlayOption>();

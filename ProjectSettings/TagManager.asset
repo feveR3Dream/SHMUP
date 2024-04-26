@@ -50,3 +50,9 @@ TagManager:
   - name: Stars
     uniqueID: 269845055
     locked: 0
+  - name: Bullets
+    uniqueID: 1809559965
+    locked: 0
+  - name: Enemies
+    uniqueID: 1346142521
+    locked: 0

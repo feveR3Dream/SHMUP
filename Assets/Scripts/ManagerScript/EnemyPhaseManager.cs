@@ -37,13 +37,20 @@ public class EnemyPhaseManager : MonoBehaviour
     public bool canTakeDamage; // Enemy vulnarable state
     public bool canSpawn; // Enemy spawn permission
     public bool newWave; // A boolean value that control the game waves.
+
+    /* THIS IS NOT NEEDED
     private bool firstPhase;   // Wave 1 - 5
     private bool secondPhase; // Wave 6 - 10
     private bool thirdPhase; // Wave 11 - 15
     private bool lastPhase; // Wave 16 - 20
+    */
+
     private bool phaseTextSpawn;
     private bool delayedSpawn;
 
+
+
+    /*
     void Start()
     {
         canShoot = false;
@@ -166,4 +173,5 @@ public class EnemyPhaseManager : MonoBehaviour
 
         }
     }
+    */
 }

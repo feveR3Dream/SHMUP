@@ -337,7 +337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (24)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -472,7 +472,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (6)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -607,7 +607,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (5)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -742,7 +742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (26)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -877,7 +877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (23)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -1012,7 +1012,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (2)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -1147,7 +1147,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (14)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -1282,7 +1282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (27)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -1417,7 +1417,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (18)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -1552,7 +1552,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (30)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -1687,7 +1687,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (13)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -1822,7 +1822,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (16)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -1957,7 +1957,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (17)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -2092,7 +2092,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (15)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -2227,7 +2227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (20)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -2362,7 +2362,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (9)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -2497,7 +2497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (19)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -2632,7 +2632,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (3)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -2767,7 +2767,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (25)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -2902,7 +2902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (7)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -3037,7 +3037,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (12)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -3172,7 +3172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (22)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -3307,7 +3307,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (11)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -3442,7 +3442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (28)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -3577,7 +3577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (4)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -3712,7 +3712,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (29)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
@@ -3847,7 +3847,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597837698179204332, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}
       propertyPath: m_Name
-      value: Phase1BasicEnemy (10)
+      value: BasicEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2757813672845718484, guid: 5e871efc26d380d4eba305b22875ae5e, type: 3}

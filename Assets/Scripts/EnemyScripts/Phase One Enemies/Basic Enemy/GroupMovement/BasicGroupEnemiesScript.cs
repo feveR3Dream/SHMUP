@@ -17,6 +17,7 @@ public class BasicGroupMovement : MonoBehaviour
     [SerializeField] float time; /* Timer, increase by a Time.deltaTime amount */
     public int basicEnemiesCount = 0;
 
+
     [Header("References")]
     /* LayerMasks */
     [SerializeField] LayerMask rightLayerDetection;
