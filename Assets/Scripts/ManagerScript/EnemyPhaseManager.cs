@@ -7,119 +7,122 @@ using TMPro;
 public class EnemyPhaseManager : MonoBehaviour
 {
     [Header("Scripts")]
-    [SerializeField] PlayOption playStatus;
-    [SerializeField] Health playerDead;
-    [SerializeField] BackToMenu restartStatus;
+    [SerializeField] private PlayOption playStatus;
+    [SerializeField] private Health playerDead;
+    [SerializeField] private BackToMenu restartStatus;
 
 
     [Header("References")]
     /* Transforms */
-    [SerializeField] Transform spawnPosition;
+    [SerializeField] private Transform spawnPosition;
     /* GameObjects */
-    [SerializeField] GameObject phaseOneGroup;
+    [SerializeField] private GameObject basicEnemiesGroupContainer;
     /* TextMeshProUGUI */
-    [SerializeField] TextMeshProUGUI phaseText;
+    [SerializeField] private TextMeshProUGUI waveText;
 
 
     [Header("Values")]
     /* Floats and Ints */
-    [SerializeField] float slowDownSpeed;
-    [SerializeField] float normalizeSpeed;
-    [SerializeField] float desiredSlowSpeed;
-    [SerializeField] float delayPhaseTime;
-    [SerializeField] float delayShootTime;
+    [SerializeField] private float slowDownSpeed;
+    [SerializeField] private float normalizeSpeed;
+    [SerializeField] private float desiredSlowSpeed;
+    [SerializeField] private float delayPhaseTime;
+    [SerializeField] private float delayShootTime;
     private float slowTime;
     private float normalizeTime;
+
+    private int textBlinkAmount = 0;
     public int waveCounter = 1;
+    private int basicEnemiesCount = 0; // Default value of basic enemy
+
+
     /* Booleans */
-    public bool canShoot; // Enemy firing ability
-    public bool canMove; // Enemy movement ability
-    public bool canTakeDamage; // Enemy vulnarable state
-    public bool canSpawn; // Enemy spawn permission
+    public bool canShoot = false; // Enemy firing ability
+    public bool canMove = false; // Enemy movement ability
+    public bool canTakeDamage = false; // Enemy vulnarable state
+    public bool canSpawn = false; // Enemy spawn permission
+
     public bool newWave; // A boolean value that control the game waves.
+    private bool waveTextSpawn = false;
+    private bool delayedSpawn = false;
 
-    /* THIS IS NOT NEEDED
-    private bool firstPhase;   // Wave 1 - 5
-    private bool secondPhase; // Wave 6 - 10
-    private bool thirdPhase; // Wave 11 - 15
-    private bool lastPhase; // Wave 16 - 20
-    */
-
-    private bool phaseTextSpawn;
-    private bool delayedSpawn;
-
-
-
-    /*
     void Start()
     {
-        canShoot = false;
-        canTakeDamage = false;
-        canMove = false;
-        canSpawn = false;
-        phaseText.gameObject.SetActive(false); 
-        firstPhase = true; 
-        secondPhase = false;
-        thirdPhase = false; 
-        lastPhase = false;
-        phaseTextSpawn = false;
-        delayedSpawn = false;
         newWave = true;
+        canShoot = false; 
+        canMove = false; 
+        canTakeDamage = false; 
+        canSpawn = false; 
+        waveTextSpawn = false;
+        delayedSpawn = false;
+        waveText.gameObject.SetActive(false);
+
     }
 
     void Update()
     {   
+        if (basicEnemiesGroupContainer != null)
+        {
+            Transform enemiesContainer = basicEnemiesGroupContainer.transform.Find("BasicGroupEnemies"); // It does not matter if it is on scene or not
+            if (enemiesContainer == null)
+            {
+                Debug.Log("Shit not running");
+                return;
+            }
+            else
+            {
+                basicEnemiesCount = enemiesContainer.childCount;
+            }
+        }
+
+
         if (playStatus.started)
         {
+
             StartCoroutine(Delaying());
 
             if (delayedSpawn)
             {
-                Wave1To5();
+                EnemyWaveController();
             }
 
         }
-        deathSlowDownGame();   
+        DeathSlowDownGame();   
     }
 
     IEnumerator Delaying()
     {
         yield return new WaitForSeconds(2f);
-        delayedSpawn = true;
+        delayedSpawn = true;          
     }
 
-    IEnumerator PhaseOneGroup()
+    IEnumerator BasicEnemyGroup()
     {
         yield return new WaitForSeconds(delayPhaseTime);
-        Instantiate(phaseOneGroup, spawnPosition.position, Quaternion.identity);
+        Instantiate(basicEnemiesGroupContainer, spawnPosition.position, Quaternion.identity);
         yield return new WaitForSeconds(delayShootTime);
         canShoot = true;
         canTakeDamage = true;
         canMove = true;
     }
 
-    IEnumerator SpawnPhaseText() // Phase text flickering on and off until the next phase happens.
+    IEnumerator SpawnWaveText() // Phase text flickering on and off until the next phase happens.
     {
-        yield return new WaitForSeconds(0.25f);
-        phaseText.gameObject.SetActive(true);
-        phaseText.text = "Wave: " + waveCounter;
-        yield return new WaitForSeconds(0.25f);
-        phaseText.gameObject.SetActive(false);
-        yield return new WaitForSeconds(0.25f);
-        phaseText.gameObject.SetActive(true);
-        phaseText.text = "Wave: " + waveCounter;
-        yield return new WaitForSeconds(0.25f);
-        phaseText.gameObject.SetActive(false);
-        yield return new WaitForSeconds(0.25f);
-        phaseText.gameObject.SetActive(true);
-        phaseText.text = "Wave: " + waveCounter;
-        yield return new WaitForSeconds(0.25f);
-        phaseText.gameObject.SetActive(false);
-        yield return new WaitForSeconds(0.25f);
+        for (int i = 0; i < 5; i++) // Still, this might mess the game up, just save everything just in case
+        {
+            yield return new WaitForSeconds(0.25f);
+            waveText.gameObject.SetActive(true);
+            waveText.text = "Wave: " + waveCounter;
+            yield return new WaitForSeconds(0.25f);
+            waveText.gameObject.SetActive(false);
+            textBlinkAmount++;
+        }
+
+        textBlinkAmount = 0;
         canSpawn = true;
     }
 
-    void deathSlowDownGame()
+    void DeathSlowDownGame()
     {
         if (playerDead.dead && !restartStatus.startAgain)
         {
@@ -135,43 +138,37 @@ public class EnemyPhaseManager : MonoBehaviour
         }
     }
 
-    IEnumerator PhaseTextSpawner() // Initiated after the game has been started.
+    IEnumerator WaveTextSpawner() // Initiated after the game has been started.
     {
-        if (playStatus.started && !phaseTextSpawn)
+        if (playStatus.started && !waveTextSpawn)
         {
-            phaseTextSpawn = true;
+            waveTextSpawn = true;
             yield return new WaitForSeconds(1.5f);
-            StartCoroutine(SpawnPhaseText());
+            StartCoroutine(SpawnWaveText());
         }
     } 
 
-    void Wave1To5() // WAVE 1 - 5 || Initiated after spawning phase text.
+    
+    void EnemyWaveController() 
     {
-        if (firstPhase && newWave && waveCounter == 1)
+        if (newWave)
         {
             if (!canSpawn)
             {
-                StartCoroutine(PhaseTextSpawner());
+                StartCoroutine(WaveTextSpawner());
             }
 
             if (canSpawn)
             {
-                phaseTextSpawn = false;
+                waveTextSpawn = false;
                 newWave = false;
                 canSpawn = false;
-                StartCoroutine(PhaseOneGroup());
+                StartCoroutine(BasicEnemyGroup());
             }
 
         }
 
-        if (firstPhase && newWave && waveCounter == 2)
-        {
-            if (!canSpawn)
-            {
-                StartCoroutine(PhaseTextSpawner());
-            }
-
-        }
     }
-    */
+    
+    
 }

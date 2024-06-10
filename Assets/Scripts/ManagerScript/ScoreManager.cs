@@ -15,7 +15,7 @@ public class ScoreManager : MonoBehaviour
     public int score; 
     public int newUpdatedScore;
     /* Booleans */
-    public bool spawnAllowed = false;           
+    public bool spawnAllowed = false; // Permission for the score text to spawn
     private bool scoreSpawn = false;          
     private bool finalScoreSpawn = false;     
 
@@ -43,11 +43,64 @@ public class ScoreManager : MonoBehaviour
         scoreTextDeath.gameObject.SetActive(false);      
     }
 
+
     void Update()
     {
         ScoreDisplay();
         deathShowScore();
     }
+
+
+    public void UpdateScoreSmoothly(int amount) // Called within a basic enemy script.
+    {
+        newUpdatedScore += amount;
+        StartCoroutine(UpdateScoreTextSmoothly(newUpdatedScore));
+    }
+
+
+    void UpdateScoreText() // Initial score set up when the game begins.
+    {
+        string stringScore = score.ToString("D14");
+        scoreHolder.text = stringScore; // Pay close attention to this part. [Linked with TextWrite script]
+        textWriter.AddWriter(scoreHolder, scoreHolder.text, initialScoreSpawnSpeed, true);
+    }
+
+
+    void UpdateScoreFinal() // Upon player's death, it will be set to active.
+    {
+        string stringScore = newUpdatedScore.ToString("D14");
+        scoreAfterDeath.text = stringScore; // Pay close attention to this part. [Linked with TextWrite script]
+        textWriter.AddWriter(scoreAfterDeath, scoreAfterDeath.text, initialScoreSpawnSpeed, true);
+    }
+
+
+    void ScoreDisplay() // Main function that display the score.
+    {
+        if (playStatus.started && !spawnAllowed)
+        {
+            spawnAllowed = true;
+            StartCoroutine(ScoreTextSpawn()); 
+            if (!scoreSpawn) 
+            {
+                scoreSpawn = true;
+                StartCoroutine(DelayScoreUpdate());
+            }
+        }
+    }
+
+    void deathShowScore()
+    {
+        if (playerDead.dead && !restartStatus.startAgain && !finalScoreSpawn)
+        {
+            finalScoreSpawn = true;
+            scoreHolder.gameObject.SetActive(false);
+            scoreText.gameObject.SetActive(false);
+            scoreTextDeath.gameObject.SetActive(true);
+            scoreAfterDeath.gameObject.SetActive(true);
+            UpdateScoreFinal();
+        }
+    }
+
 
     IEnumerator ScoreTextSpawn()
     {
@@ -60,7 +113,7 @@ public class ScoreManager : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-    } 
+    }
 
     IEnumerator DelayScoreUpdate() // Initial score set up when the game begins.
     {
@@ -83,49 +136,4 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public void UpdateScoreSmoothly(int amount) // Called within a basic enemy script.
-    {
-        newUpdatedScore += amount;
-        StartCoroutine(UpdateScoreTextSmoothly(newUpdatedScore));
-    }
-
-    void UpdateScoreText() // Initial score set up when the game begins.
-    {
-        string stringScore = score.ToString("D14");
-        scoreHolder.text = stringScore; // Pay close attention to this part. [Linked with TextWrite script]
-        textWriter.AddWriter(scoreHolder, scoreHolder.text, initialScoreSpawnSpeed, true);
-    }
-
-    void UpdateScoreFinal() // Upon player's death, it will be set to active.
-    {
-        string stringScore = newUpdatedScore.ToString("D14");
-        scoreAfterDeath.text = stringScore; // Pay close attention to this part. [Linked with TextWrite script]
-        textWriter.AddWriter(scoreAfterDeath, scoreAfterDeath.text, initialScoreSpawnSpeed, true);
-    }
-
-    void ScoreDisplay() // Main function that display the score.
-    {
-        if (playStatus.started && !spawnAllowed)
-        {
-            spawnAllowed = true;
-            StartCoroutine(ScoreTextSpawn()); 
-            if (!scoreSpawn) 
-            {
-                scoreSpawn = true;
-                StartCoroutine(DelayScoreUpdate());
-            }
-        }
-    }
-    void deathShowScore()
-    {
-        if (playerDead.dead && !restartStatus.startAgain && !finalScoreSpawn)
-        {
-            finalScoreSpawn = true;
-            scoreHolder.gameObject.SetActive(false);
-            scoreText.gameObject.SetActive(false);
-            scoreTextDeath.gameObject.SetActive(true);
-            scoreAfterDeath.gameObject.SetActive(true);
-            UpdateScoreFinal();
-        }
-    }
 }

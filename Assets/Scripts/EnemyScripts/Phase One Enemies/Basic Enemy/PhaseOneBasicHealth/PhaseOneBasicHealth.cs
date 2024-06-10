@@ -12,18 +12,19 @@ public class PhaseOneBasicHealth : MonoBehaviour
     [Header("Values")]
     /* Floats and Ints */
     [SerializeField] int health = 20;
+    public int BasicEnemyFieldAmount;
 
 
     [Header("Scripts")]
     private EnemyPhaseManager enemyManager;
     private ScoreManager scoreManager;
-    private BasicGroupMovement enemyCounter;
+    private BasicGroupEnemiesScript enemyCounter;
 
     void Start()
     {
         enemyManager = FindObjectOfType<EnemyPhaseManager>();
         scoreManager = FindObjectOfType<ScoreManager>();
-        enemyCounter = FindObjectOfType<BasicGroupMovement>();
+        enemyCounter = FindObjectOfType<BasicGroupEnemiesScript>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -42,10 +43,11 @@ public class PhaseOneBasicHealth : MonoBehaviour
         if (health < 1)
         {
             scoreManager.UpdateScoreSmoothly(100);
-            enemyCounter.basicEnemiesCount--;
+            enemyCounter.BasicEnemiesCount--;
             GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
             Destroy(effect, 2f);
             Destroy(gameObject);
         }
+
     }
 }

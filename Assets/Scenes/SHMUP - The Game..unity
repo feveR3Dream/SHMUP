@@ -17838,8 +17838,8 @@ MonoBehaviour:
   playerDead: {fileID: 4758035550049250469}
   restartStatus: {fileID: 308780776}
   spawnPosition: {fileID: 1407411871}
-  phaseOneGroup: {fileID: 4697575202294061727, guid: 30f9ab07ddcdb014dafb2ac05541930c, type: 3}
-  phaseText: {fileID: 2116137061}
+  basicEnemiesGroupContainer: {fileID: 4697575202294061727, guid: 30f9ab07ddcdb014dafb2ac05541930c, type: 3}
+  waveText: {fileID: 2116137061}
   slowDownSpeed: 25
   normalizeSpeed: 1
   desiredSlowSpeed: 0.5
@@ -18438,7 +18438,7 @@ GameObject:
   - component: {fileID: 2116137062}
   - component: {fileID: 2116137061}
   m_Layer: 5
-  m_Name: Phase
+  m_Name: Wave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18483,7 +18483,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'PhasePlaceholder
+  m_text: 'WavePlaceholder
 
 '
   m_isRightToLeft: 0

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BasicGroupMovement : MonoBehaviour
+public class BasicGroupEnemiesScript : MonoBehaviour
 {
     [Header("Values")] // Will need to put away all of the [SerializeField] once everything is settled
     /* Floats and Ints */
@@ -15,7 +15,7 @@ public class BasicGroupMovement : MonoBehaviour
     [SerializeField] float initialDelayTime = 1f; /* [1] How much time before entering the camera frame */ 
     [SerializeField] float duration; /* How much time before switching direction vertically */
     [SerializeField] float time; /* Timer, increase by a Time.deltaTime amount */
-    public int basicEnemiesCount = 0;
+    public int BasicEnemiesCount = 0;
 
 
     [Header("References")]
@@ -51,19 +51,13 @@ public class BasicGroupMovement : MonoBehaviour
         downTargetPos = (Vector2)transform.position - Vector2.up * initialTravelDistance;
         downLerpPos = (Vector2)lerpPosition.position - Vector2.up * initialTravelDistance;
 
-        //Transform enemiesContainer = transform.Find("BasicGroupEnemies");
-        if (enemiesContainer != null)
-        {
-            basicEnemiesCount = enemiesContainer.childCount;
-        }
-        else
-        {
-            Debug.Log("Could not find an enemiesContainer!");
-        }
+        BasicEnemiesCount = enemiesContainer.childCount;
+
     }
 
     void Update()
     {
+        Debug.Log(BasicEnemiesCount); // Testing
         if (!arrived)
         {
             StartCoroutine(DelayInitialMovement());
@@ -142,13 +136,17 @@ public class BasicGroupMovement : MonoBehaviour
         }
     }
 
-    void AllEnemyDied()
+    void AllEnemyDied() 
     {
-        if (basicEnemiesCount <= 0)
+        if (BasicEnemiesCount <= 0)
         {
             enemyManage.newWave = true;
             enemyManage.waveCounter++;
-            Destroy(groupContainer);
+            enemyManage.canShoot = false;
+            enemyManage.canTakeDamage = false;
+            enemyManage.canMove = false;
+            Destroy(groupContainer); 
+
         }
     }
 
