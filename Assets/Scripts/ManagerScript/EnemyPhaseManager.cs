@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
-public class EnemyPhaseManager : MonoBehaviour
+public class EnemyPhaseManager : MonoBehaviour  // MISSION: 1. FINISH WAVE RNG ||| 2. FINISH CLEANING YOUR SCRIPTS {Private and Public}
 {
     [Header("Scripts")]
     [SerializeField] private PlayOption playStatus;
@@ -14,9 +14,11 @@ public class EnemyPhaseManager : MonoBehaviour
 
     [Header("References")]
     /* Transforms */
-    [SerializeField] private Transform spawnPosition;
+    [SerializeField] private Transform basicEnemySpawnLocation;
+    [SerializeField] private Transform SOESpawnLocation;
     /* GameObjects */
     [SerializeField] private GameObject basicEnemiesGroupContainer;
+    [SerializeField] private GameObject SOE;
     /* TextMeshProUGUI */
     [SerializeField] private TextMeshProUGUI waveText;
 
@@ -31,9 +33,9 @@ public class EnemyPhaseManager : MonoBehaviour
     private float slowTime;
     private float normalizeTime;
 
-    private int textBlinkAmount = 0;
     public int waveCounter = 1;
-    private int basicEnemiesCount = 0; // Default value of basic enemy
+    public int healthMultiplied = -1;
+    public int WaveRNG = 0; 
 
 
     /* Booleans */
@@ -41,13 +43,14 @@ public class EnemyPhaseManager : MonoBehaviour
     public bool canMove = false; // Enemy movement ability
     public bool canTakeDamage = false; // Enemy vulnarable state
     public bool canSpawn = false; // Enemy spawn permission
+    public bool canSpawnSOE = false;
 
     public bool newWave; // A boolean value that control the game waves.
-    private bool waveTextSpawn = false;
+    public bool waveTextSpawn = false;
     private bool delayedSpawn = false;
 
     void Start()
-    {
+    {   // Why do I have to write it like this?
         newWave = true;
         canShoot = false; 
         canMove = false; 
@@ -55,26 +58,13 @@ public class EnemyPhaseManager : MonoBehaviour
         canSpawn = false; 
         waveTextSpawn = false;
         delayedSpawn = false;
+        canSpawnSOE = false;
         waveText.gameObject.SetActive(false);
 
     }
 
     void Update()
     {   
-        if (basicEnemiesGroupContainer != null)
-        {
-            Transform enemiesContainer = basicEnemiesGroupContainer.transform.Find("BasicGroupEnemies"); // It does not matter if it is on scene or not
-            if (enemiesContainer == null)
-            {
-                Debug.Log("Shit not running");
-                return;
-            }
-            else
-            {
-                basicEnemiesCount = enemiesContainer.childCount;
-            }
-        }
-
 
         if (playStatus.started)
         {
@@ -99,7 +89,7 @@ public class EnemyPhaseManager : MonoBehaviour
     IEnumerator BasicEnemyGroup()
     {
         yield return new WaitForSeconds(delayPhaseTime);
-        Instantiate(basicEnemiesGroupContainer, spawnPosition.position, Quaternion.identity);
+        Instantiate(basicEnemiesGroupContainer, basicEnemySpawnLocation.position, Quaternion.identity);
         yield return new WaitForSeconds(delayShootTime);
         canShoot = true;
         canTakeDamage = true;
@@ -108,18 +98,24 @@ public class EnemyPhaseManager : MonoBehaviour
 
     IEnumerator SpawnWaveText() // Phase text flickering on and off until the next phase happens.
     {
-        for (int i = 0; i < 5; i++) // Still, this might mess the game up, just save everything just in case
+        for (int i = 0; i < 3; i++) // Still, this might mess the game up, just save everything just in case
         {
             yield return new WaitForSeconds(0.25f);
             waveText.gameObject.SetActive(true);
             waveText.text = "Wave: " + waveCounter;
             yield return new WaitForSeconds(0.25f);
             waveText.gameObject.SetActive(false);
-            textBlinkAmount++;
         }
 
-        textBlinkAmount = 0;
-        canSpawn = true;
+        if (canSpawnSOE)
+        {
+            canSpawn = false;
+        }
+        else
+        {        
+            canSpawn = true;
+        }
+
     }
 
     void DeathSlowDownGame()
@@ -148,22 +144,45 @@ public class EnemyPhaseManager : MonoBehaviour
         }
     } 
 
+    IEnumerator SpawnSOE()
+    {
+        yield return new WaitForSeconds(3f);
+        Instantiate(SOE, SOESpawnLocation.position, Quaternion.identity);
+    }
+
     
     void EnemyWaveController() 
     {
         if (newWave)
         {
-            if (!canSpawn)
+            if (waveCounter % 5 == 0)
             {
-                StartCoroutine(WaveTextSpawner());
-            }
+                if (!canSpawnSOE)
+                {
+                    newWave = false;
+                    canSpawnSOE = true;
+                    StartCoroutine(WaveTextSpawner());
+                    StartCoroutine(SpawnSOE());
 
-            if (canSpawn)
+                }
+
+            }
+            else
             {
-                waveTextSpawn = false;
-                newWave = false;
-                canSpawn = false;
-                StartCoroutine(BasicEnemyGroup());
+                if (!canSpawn)
+                {
+                    StartCoroutine(WaveTextSpawner());
+
+                }
+
+                if (canSpawn)
+                {            
+                    healthMultiplied++; // Increasing the amount of enemy's HP after each wave
+                    waveTextSpawn = false;
+                    newWave = false;
+                    canSpawn = false;
+                    StartCoroutine(BasicEnemyGroup());
+                }
             }
 
         }

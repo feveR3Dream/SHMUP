@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2148857479070331505}
   - component: {fileID: 9081155239647759650}
   m_Layer: 0
-  m_Name: SpawnEffect
+  m_Name: StarExplodeEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

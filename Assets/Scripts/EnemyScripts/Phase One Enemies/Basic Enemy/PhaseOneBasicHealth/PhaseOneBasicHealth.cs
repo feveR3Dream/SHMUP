@@ -25,6 +25,8 @@ public class PhaseOneBasicHealth : MonoBehaviour
         enemyManager = FindObjectOfType<EnemyPhaseManager>();
         scoreManager = FindObjectOfType<ScoreManager>();
         enemyCounter = FindObjectOfType<BasicGroupEnemiesScript>();
+
+        IncreaseHealth();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -40,6 +42,8 @@ public class PhaseOneBasicHealth : MonoBehaviour
 
     void Update()
     {
+
+
         if (health < 1)
         {
             scoreManager.UpdateScoreSmoothly(100);
@@ -49,5 +53,12 @@ public class PhaseOneBasicHealth : MonoBehaviour
             Destroy(gameObject);
         }
 
+        Debug.Log(health);
+
+    }
+
+    void IncreaseHealth()
+    {
+        health = health + (2 * enemyManager.healthMultiplied); // Worked
     }
 }

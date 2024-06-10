@@ -57,7 +57,7 @@ public class BasicGroupEnemiesScript : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(BasicEnemiesCount); // Testing
+
         if (!arrived)
         {
             StartCoroutine(DelayInitialMovement());
