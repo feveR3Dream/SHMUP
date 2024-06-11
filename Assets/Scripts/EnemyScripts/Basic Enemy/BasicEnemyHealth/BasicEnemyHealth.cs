@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PhaseOneBasicHealth : MonoBehaviour
+public class BasicEnemyHealth : MonoBehaviour
 {
     [Header("References")]
     /* GameObjects */
@@ -12,7 +12,6 @@ public class PhaseOneBasicHealth : MonoBehaviour
     [Header("Values")]
     /* Floats and Ints */
     [SerializeField] int health = 20;
-    public int BasicEnemyFieldAmount;
 
 
     [Header("Scripts")]
@@ -25,6 +24,11 @@ public class PhaseOneBasicHealth : MonoBehaviour
         enemyManager = FindObjectOfType<EnemyPhaseManager>();
         scoreManager = FindObjectOfType<ScoreManager>();
         enemyCounter = FindObjectOfType<BasicGroupEnemiesScript>();
+
+        if (enemyManager == null || scoreManager == null || enemyCounter == null)
+        {
+            Debug.Log("Where the hell are the scripts?");
+        }
 
         IncreaseHealth();
     }
@@ -52,8 +56,6 @@ public class PhaseOneBasicHealth : MonoBehaviour
             Destroy(effect, 2f);
             Destroy(gameObject);
         }
-
-        Debug.Log(health);
 
     }
 

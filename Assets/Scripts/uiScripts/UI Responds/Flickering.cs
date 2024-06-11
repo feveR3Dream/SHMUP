@@ -89,7 +89,6 @@ namespace Testing_Damage_Flickering
         {
             if (collision.gameObject.CompareTag("Bullet"))
             {
-                Debug.Log("Hitting");
                 Flash();
             }
         }

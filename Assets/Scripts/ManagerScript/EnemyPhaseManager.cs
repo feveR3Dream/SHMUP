@@ -15,9 +15,11 @@ public class EnemyPhaseManager : MonoBehaviour  // MISSION: 1. FINISH WAVE RNG |
     [Header("References")]
     /* Transforms */
     [SerializeField] private Transform basicEnemySpawnLocation;
+    [SerializeField] private Transform aoeEnemySpawnLocationMiddle;
     [SerializeField] private Transform SOESpawnLocation;
     /* GameObjects */
     [SerializeField] private GameObject basicEnemiesGroupContainer;
+    [SerializeField] private GameObject aoeEnemy;
     [SerializeField] private GameObject SOE;
     /* TextMeshProUGUI */
     [SerializeField] private TextMeshProUGUI waveText;
@@ -33,9 +35,10 @@ public class EnemyPhaseManager : MonoBehaviour  // MISSION: 1. FINISH WAVE RNG |
     private float slowTime;
     private float normalizeTime;
 
+    public int loopWave = 1;
     public int waveCounter = 1;
     public int healthMultiplied = -1;
-    public int WaveRNG = 0; 
+    public int WaveRNG = 0; // In charge of modifying basic's bullet spawn RNG through each wave.
 
 
     /* Booleans */
@@ -48,6 +51,7 @@ public class EnemyPhaseManager : MonoBehaviour  // MISSION: 1. FINISH WAVE RNG |
     public bool newWave; // A boolean value that control the game waves.
     public bool waveTextSpawn = false;
     private bool delayedSpawn = false;
+    private bool allowAlterRNG = false;
 
     void Start()
     {   // Why do I have to write it like this?
@@ -60,7 +64,7 @@ public class EnemyPhaseManager : MonoBehaviour  // MISSION: 1. FINISH WAVE RNG |
         delayedSpawn = false;
         canSpawnSOE = false;
         waveText.gameObject.SetActive(false);
-
+        allowAlterRNG = false;
     }
 
     void Update()
@@ -77,7 +81,8 @@ public class EnemyPhaseManager : MonoBehaviour  // MISSION: 1. FINISH WAVE RNG |
             }
 
         }
-        DeathSlowDownGame();   
+        DeathSlowDownGame();
+
     }
 
     IEnumerator Delaying()
@@ -96,6 +101,15 @@ public class EnemyPhaseManager : MonoBehaviour  // MISSION: 1. FINISH WAVE RNG |
         canMove = true;
     }
 
+    IEnumerator AoeEnemy()
+    {
+        yield return new WaitForSeconds(delayPhaseTime);
+        Instantiate(aoeEnemy, aoeEnemySpawnLocationMiddle.position, Quaternion.identity);
+        yield return new WaitForSeconds(delayShootTime);
+        canShoot = true;
+        canTakeDamage = true;
+    }
+
     IEnumerator SpawnWaveText() // Phase text flickering on and off until the next phase happens.
     {
         for (int i = 0; i < 3; i++) // Still, this might mess the game up, just save everything just in case
@@ -107,7 +121,7 @@ public class EnemyPhaseManager : MonoBehaviour  // MISSION: 1. FINISH WAVE RNG |
             waveText.gameObject.SetActive(false);
         }
 
-        if (canSpawnSOE)
+        if (canSpawnSOE) // If it is spawning Star of Evolution, don't spawn enemies, and vice versa.
         {
             canSpawn = false;
         }
@@ -155,36 +169,90 @@ public class EnemyPhaseManager : MonoBehaviour  // MISSION: 1. FINISH WAVE RNG |
     {
         if (newWave)
         {
-            if (waveCounter % 5 == 0)
+            if (waveCounter % 2 == 0)
             {
-                if (!canSpawnSOE)
+                if (!allowAlterRNG)
                 {
-                    newWave = false;
-                    canSpawnSOE = true;
-                    StartCoroutine(WaveTextSpawner());
-                    StartCoroutine(SpawnSOE());
-
+                    allowAlterRNG = true;
+                    WaveRNG++; 
                 }
-
             }
             else
             {
-                if (!canSpawn)
-                {
-                    StartCoroutine(WaveTextSpawner());
-
-                }
-
-                if (canSpawn)
-                {            
-                    healthMultiplied++; // Increasing the amount of enemy's HP after each wave
-                    waveTextSpawn = false;
-                    newWave = false;
-                    canSpawn = false;
-                    StartCoroutine(BasicEnemyGroup());
-                }
+                allowAlterRNG = false;
             }
 
+            switch (loopWave)
+            {
+                case 1:
+                    if (!canSpawn)
+                    {
+                        StartCoroutine(WaveTextSpawner());
+
+                    }
+
+                    if (canSpawn)
+                    {            
+                        healthMultiplied++; // Increasing the amount of enemy's HP after each wave
+                        waveTextSpawn = false;
+                        newWave = false;
+                        canSpawn = false;
+                        StartCoroutine(BasicEnemyGroup());
+                    }
+                    break;
+
+                case 2:
+                    if (!canSpawn)
+                    {
+                        StartCoroutine(WaveTextSpawner());
+
+                    }
+
+                    if (canSpawn)
+                    {
+                        healthMultiplied++; 
+                        waveTextSpawn = false;
+                        newWave = false;
+                        canSpawn = false;
+                        StartCoroutine(AoeEnemy());
+                    }
+                    break;
+
+                case 3:
+                    if (!canSpawn)
+                    {
+                        StartCoroutine(WaveTextSpawner());
+
+                    }
+
+                    if (canSpawn)
+                    {
+                        healthMultiplied++; // Increasing the amount of enemy's HP after each wave
+                        waveTextSpawn = false;
+                        newWave = false;
+                        canSpawn = false;
+                        StartCoroutine(BasicEnemyGroup());
+                    }
+                    break;
+
+                case 4:
+                    if (!canSpawnSOE)
+                    {
+                        newWave = false;
+                        canSpawnSOE = true;
+                        StartCoroutine(WaveTextSpawner());
+                        StartCoroutine(SpawnSOE());
+
+                    }
+                    break;
+                case 5:
+                    break;
+
+                default: 
+                    break;
+
+            }
+        
         }
 
     }

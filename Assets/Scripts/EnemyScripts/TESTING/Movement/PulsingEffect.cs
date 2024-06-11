@@ -3,38 +3,40 @@ using UnityEngine;
 
 public class PulsingEffect : MonoBehaviour
 {
-    public float minScale = 1f; 
-    public float maxScale = 1.5f; 
-    public float pulseSpeed = 1f; 
+    [Header("Values")]
+    [SerializeField] private float maxScale = 1.5f; 
+    [SerializeField] private float pulseSpeed = 1f;
+    private float lerpTime = 0f;
+    private Vector2 originalSize;
+    private Vector2 targetSize;
+
 
     void Start()
-    {
-        StartCoroutine(PulseEffect());     
+    { 
+        originalSize = transform.localScale;
+        targetSize = Vector2.one * maxScale;
     }
 
-    IEnumerator PulseEffect()
+
+    private void Update()
     {
-        while (true)
+        ChangeSize();
+    }
+
+
+    void ChangeSize()
+    {
+        lerpTime += Time.deltaTime * pulseSpeed;
+        transform.localScale = Vector2.Lerp(originalSize, targetSize, lerpTime);
+
+        if (lerpTime > 5f)
         {
-            
-            float t = 0f;
-
-            while (t < 1f)
-            {
-                t += Time.deltaTime * pulseSpeed;
-                transform.localScale = Vector3.Lerp(Vector3.one * minScale, Vector3.one * maxScale, t);
-                yield return null;
-            }
-
-            t = 0f;
-            while (t < 1f)
-            {
-                t += Time.deltaTime * pulseSpeed;
-                transform.localScale = Vector3.Lerp(Vector3.one * maxScale, Vector3.one * minScale, t);
-                yield return null;
-            }
-            
+            Vector2 tempScale = originalSize;
+            originalSize = targetSize;
+            targetSize = tempScale;
+            lerpTime = 0f;
         }
     }
+
 }
 

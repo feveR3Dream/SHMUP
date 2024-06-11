@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - EnemyBullet
   - TESTING
+  - EnhancedBullet
   layers:
   - Default
   - TransparentFX

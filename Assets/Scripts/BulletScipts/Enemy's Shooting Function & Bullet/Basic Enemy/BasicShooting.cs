@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicShootingPhaseOne : MonoBehaviour
+public class BasicShooting : MonoBehaviour
 {
     [Header("References")]
     /* Transforms */
@@ -19,22 +19,58 @@ public class BasicShootingPhaseOne : MonoBehaviour
     [SerializeField] int rngNumber = 10;
     /* Booleans */ 
     bool canShoot = true;
+    bool alterRNG = false;
 
 
     [Header("Scripts")]
-    private EnemyPhaseManager shootAllow;
+    private EnemyPhaseManager enemyManage;
 
     void Start()
     {
-        shootAllow = FindObjectOfType<EnemyPhaseManager>();
+        GameObject game = GameObject.Find("GAME");
+        if (game != null)
+        {
+            Transform manager = game.transform.Find("MANAGER");
+            if (manager != null)
+            {
+                Transform enemyManager = manager.transform.Find("Enemy Phase Manager");
+
+                if (enemyManager != null)
+                {                
+                    enemyManage = enemyManager.GetComponent<EnemyPhaseManager>();
+                    if (enemyManage == null)
+                    {
+                        Debug.Log("Could not find EnemyPhaseManager script");
+                    }
+
+                } 
+            }
+        }
     }
 
     void Update()
     {
-        if (canShoot && shootAllow.canShoot)
+        ChangeRNG();
+
+        if (canShoot && enemyManage.canShoot)
         {
             StartCoroutine(ShootFunction());
         }
+    }
+
+    void ChangeRNG()
+    {
+        if (!alterRNG)
+        {
+            alterRNG = true;
+            rngNumber = rngNumber - enemyManage.WaveRNG;  
+        }
+
+        if (rngNumber < 10) // Cap maximum RNG amount.
+        {
+            rngNumber = 10;
+        }
+
     }
 
     void ShootWithDelay()

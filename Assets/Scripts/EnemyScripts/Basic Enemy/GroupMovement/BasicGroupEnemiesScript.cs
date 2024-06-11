@@ -47,6 +47,10 @@ public class BasicGroupEnemiesScript : MonoBehaviour
     void Start()
     {
         enemyManage = FindObjectOfType<EnemyPhaseManager>();
+        if (enemyManage == null)
+        {
+            Debug.Log("Could not find EnemyPhaseManager script");
+        }
         arrived = false;
         downTargetPos = (Vector2)transform.position - Vector2.up * initialTravelDistance;
         downLerpPos = (Vector2)lerpPosition.position - Vector2.up * initialTravelDistance;
@@ -142,6 +146,7 @@ public class BasicGroupEnemiesScript : MonoBehaviour
         {
             enemyManage.newWave = true;
             enemyManage.waveCounter++;
+            enemyManage.loopWave++;
             enemyManage.canShoot = false;
             enemyManage.canTakeDamage = false;
             enemyManage.canMove = false;

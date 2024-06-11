@@ -153,6 +153,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 157624670}
+  - {fileID: 389604654}
   m_Father: {fileID: 436909718}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &37239858
@@ -315,7 +316,7 @@ GameObject:
   m_Component:
   - component: {fileID: 157624670}
   m_Layer: 0
-  m_Name: '||||PhaseOneBasicEnemiesSpawnPos||||'
+  m_Name: '||||BasicEnemiesSpawnPos||||'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5347,6 +5348,38 @@ MonoBehaviour:
   starEffectTwo: {fileID: 820225481}
   starEffectThree: {fileID: 703413952}
   deadStatus: {fileID: 4758035550049250469}
+--- !u!1 &389604653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 389604654}
+  m_Layer: 0
+  m_Name: '||||AoeEnemiesSpawnPos||||'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &389604654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389604653}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1560480547}
+  m_Father: {fileID: 2430267}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &410097766
 GameObject:
   m_ObjectHideFlags: 0
@@ -17752,8 +17785,10 @@ MonoBehaviour:
   playerDead: {fileID: 4758035550049250469}
   restartStatus: {fileID: 308780776}
   basicEnemySpawnLocation: {fileID: 1407411871}
+  aoeEnemySpawnLocationMiddle: {fileID: 1560480547}
   SOESpawnLocation: {fileID: 249436600}
   basicEnemiesGroupContainer: {fileID: 4697575202294061727, guid: 30f9ab07ddcdb014dafb2ac05541930c, type: 3}
+  aoeEnemy: {fileID: 7652840021284433989, guid: 35f6e033cdc10f74688067a08af337db, type: 3}
   SOE: {fileID: 7191258292675989854, guid: ac7e8746cf3ac3d499ecb3f02df10de8, type: 3}
   waveText: {fileID: 2116137061}
   slowDownSpeed: 25
@@ -17761,8 +17796,10 @@ MonoBehaviour:
   desiredSlowSpeed: 0.5
   delayPhaseTime: 0
   delayShootTime: 2
+  loopWave: 1
   waveCounter: 1
   healthMultiplied: -1
+  WaveRNG: 0
   canShoot: 0
   canMove: 0
   canTakeDamage: 0
@@ -17770,6 +17807,37 @@ MonoBehaviour:
   canSpawnSOE: 0
   newWave: 0
   waveTextSpawn: 0
+--- !u!1 &1560480546
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1560480547}
+  m_Layer: 9
+  m_Name: AoeSpawnLocationMiddle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1560480547
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560480546}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -24.4, y: 26.444447, z: -8.756012}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 389604654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1564016906
 GameObject:
   m_ObjectHideFlags: 0
