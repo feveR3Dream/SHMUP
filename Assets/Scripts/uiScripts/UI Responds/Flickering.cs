@@ -87,7 +87,7 @@ namespace Testing_Damage_Flickering
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.CompareTag("Bullet"))
+            if (collision.gameObject.CompareTag("Bullet") || collision.gameObject.CompareTag("EnhancedBullet"))
             {
                 Flash();
             }

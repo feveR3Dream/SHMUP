@@ -37,7 +37,7 @@ public class EnemyPhaseManager : MonoBehaviour  // MISSION: 1. FINISH WAVE RNG |
 
     public int loopWave = 1;
     public int waveCounter = 1;
-    public int healthMultiplied = -1;
+    public int healthMultiplied = 0;
     public int WaveRNG = 0; // In charge of modifying basic's bullet spawn RNG through each wave.
 
 
@@ -65,7 +65,8 @@ public class EnemyPhaseManager : MonoBehaviour  // MISSION: 1. FINISH WAVE RNG |
         canSpawnSOE = false;
         waveText.gameObject.SetActive(false);
         allowAlterRNG = false;
-    }
+        healthMultiplied = 0;
+}
 
     void Update()
     {   
@@ -169,7 +170,7 @@ public class EnemyPhaseManager : MonoBehaviour  // MISSION: 1. FINISH WAVE RNG |
     {
         if (newWave)
         {
-            if (waveCounter % 2 == 0)
+            if (waveCounter % 4 == 0)
             {
                 if (!allowAlterRNG)
                 {
@@ -193,7 +194,6 @@ public class EnemyPhaseManager : MonoBehaviour  // MISSION: 1. FINISH WAVE RNG |
 
                     if (canSpawn)
                     {            
-                        healthMultiplied++; // Increasing the amount of enemy's HP after each wave
                         waveTextSpawn = false;
                         newWave = false;
                         canSpawn = false;
@@ -210,7 +210,6 @@ public class EnemyPhaseManager : MonoBehaviour  // MISSION: 1. FINISH WAVE RNG |
 
                     if (canSpawn)
                     {
-                        healthMultiplied++; 
                         waveTextSpawn = false;
                         newWave = false;
                         canSpawn = false;
@@ -227,7 +226,6 @@ public class EnemyPhaseManager : MonoBehaviour  // MISSION: 1. FINISH WAVE RNG |
 
                     if (canSpawn)
                     {
-                        healthMultiplied++; // Increasing the amount of enemy's HP after each wave
                         waveTextSpawn = false;
                         newWave = false;
                         canSpawn = false;
@@ -246,6 +244,8 @@ public class EnemyPhaseManager : MonoBehaviour  // MISSION: 1. FINISH WAVE RNG |
                     }
                     break;
                 case 5:
+                    healthMultiplied++; // Increasing the amount of enemy's HP after each wave
+                    loopWave = 1;
                     break;
 
                 default: 

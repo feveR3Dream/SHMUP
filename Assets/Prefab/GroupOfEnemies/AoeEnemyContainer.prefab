@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aoeContainer: {fileID: 2970446143863377824}
+  container: {fileID: 7652840021284433989}
   AoeEnemyCount: 0
 --- !u!1001 &646370379567182566
 PrefabInstance:
@@ -57,6 +58,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2970446143863377824}
     m_Modifications:
+    - target: {fileID: 1703969136816293151, guid: 40e7a943fc329754fa883b86e6b294f9, type: 3}
+      propertyPath: timeBetweenShot
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3441294255802125071, guid: 40e7a943fc329754fa883b86e6b294f9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5
@@ -101,9 +106,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: AoeEnemyHitbox
       objectReference: {fileID: 0}
+    - target: {fileID: 7794309860626449966, guid: 40e7a943fc329754fa883b86e6b294f9, type: 3}
+      propertyPath: health
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8121988791223999766, guid: 40e7a943fc329754fa883b86e6b294f9, type: 3}
       propertyPath: m_Name
-      value: AoeEnemy (2)
+      value: AoeEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -123,6 +132,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2970446143863377824}
     m_Modifications:
+    - target: {fileID: 1703969136816293151, guid: 40e7a943fc329754fa883b86e6b294f9, type: 3}
+      propertyPath: timeBetweenShot
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3441294255802125071, guid: 40e7a943fc329754fa883b86e6b294f9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -167,6 +180,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AoeEnemyHitbox
       objectReference: {fileID: 0}
+    - target: {fileID: 7794309860626449966, guid: 40e7a943fc329754fa883b86e6b294f9, type: 3}
+      propertyPath: health
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8121988791223999766, guid: 40e7a943fc329754fa883b86e6b294f9, type: 3}
       propertyPath: m_Name
       value: AoeEnemy
@@ -189,6 +206,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2970446143863377824}
     m_Modifications:
+    - target: {fileID: 1703969136816293151, guid: 40e7a943fc329754fa883b86e6b294f9, type: 3}
+      propertyPath: timeBetweenShot
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3441294255802125071, guid: 40e7a943fc329754fa883b86e6b294f9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5
@@ -233,9 +254,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: AoeEnemyHitbox
       objectReference: {fileID: 0}
+    - target: {fileID: 7794309860626449966, guid: 40e7a943fc329754fa883b86e6b294f9, type: 3}
+      propertyPath: health
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8121988791223999766, guid: 40e7a943fc329754fa883b86e6b294f9, type: 3}
       propertyPath: m_Name
-      value: AoeEnemy (1)
+      value: 'AoeEnemy '
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

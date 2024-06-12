@@ -43,6 +43,14 @@ public class AoeEnemyHealth : MonoBehaviour
                 health--;
             }
         }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("EnhancedBullet"))
+        {
+            if (enemyManager.canTakeDamage)
+            {
+                health-=2;
+            }
+        }
     }
 
     void Update()
@@ -61,5 +69,6 @@ public class AoeEnemyHealth : MonoBehaviour
     void IncreaseHealth()
     {
         health = health + (5 * enemyManager.healthMultiplied); // Worked
+        Debug.Log(health);
     }
 }

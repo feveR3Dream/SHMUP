@@ -6,6 +6,7 @@ public class AoeGroupEnemy : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Transform aoeContainer;
+    [SerializeField] private GameObject container;
 
 
     [Header("Values")]
@@ -39,7 +40,7 @@ public class AoeGroupEnemy : MonoBehaviour
             enemyManager.loopWave++;
             enemyManager.canShoot = false;
             enemyManager.canTakeDamage = false;
-            Destroy(aoeContainer);
+            Destroy(container);
 
         }
     }

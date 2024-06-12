@@ -15,7 +15,6 @@ public class AoeMovement : MonoBehaviour
 
     void Start()
     {
-        Debug.Log(reverseSpin);
         desireLocation = new Vector2(transform.position.x, transform.position.y + travelDistance);
     }
 

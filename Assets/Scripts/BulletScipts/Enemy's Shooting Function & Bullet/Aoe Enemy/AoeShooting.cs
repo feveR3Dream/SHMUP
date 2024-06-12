@@ -64,10 +64,16 @@ public class AoeShooting : MonoBehaviour
             }
         }
 
+        timeBetweenShot -= (0.2f * enemyManage.WaveRNG);
+        Debug.Log(timeBetweenShot);
     }
 
     void Update() 
     {
+        if (timeBetweenShot < 1f)
+        {
+            timeBetweenShot = 1f;
+        }
 
         if (canShoot && enemyManage.canShoot)
         {
@@ -292,4 +298,5 @@ public class AoeShooting : MonoBehaviour
 
         canShoot = true;
     }  
+
 }

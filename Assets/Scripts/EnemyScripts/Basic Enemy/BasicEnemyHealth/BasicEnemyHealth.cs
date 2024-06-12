@@ -38,8 +38,16 @@ public class BasicEnemyHealth : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Bullet"))
         {
             if (enemyManager.canTakeDamage)
-            {   
+            {  
                 health--;
+            }
+        }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("EnhancedBullet"))
+        {
+            if (enemyManager.canTakeDamage)
+            {
+                health-=2;
             }
         }
     }
