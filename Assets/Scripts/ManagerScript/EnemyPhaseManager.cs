@@ -10,16 +10,19 @@ public class EnemyPhaseManager : MonoBehaviour  // MISSION: 1. FINISH WAVE RNG |
     [SerializeField] private PlayOption playStatus;
     [SerializeField] private Health playerDead;
     [SerializeField] private BackToMenu restartStatus;
+    [SerializeField] private PauseGame pauseStatus;
 
 
     [Header("References")]
     /* Transforms */
     [SerializeField] private Transform basicEnemySpawnLocation;
     [SerializeField] private Transform aoeEnemySpawnLocationMiddle;
+    [SerializeField] private Transform vultureEnemySpawnLocation;
     [SerializeField] private Transform SOESpawnLocation;
     /* GameObjects */
     [SerializeField] private GameObject basicEnemiesGroupContainer;
     [SerializeField] private GameObject aoeEnemy;
+    [SerializeField] private GameObject vultureEnemy;
     [SerializeField] private GameObject SOE;
     /* TextMeshProUGUI */
     [SerializeField] private TextMeshProUGUI waveText;
@@ -38,8 +41,8 @@ public class EnemyPhaseManager : MonoBehaviour  // MISSION: 1. FINISH WAVE RNG |
     public int loopWave = 1;
     public int waveCounter = 1;
     public int healthMultiplied = 0;
-    public int WaveRNG = 0; // In charge of modifying basic's bullet spawn RNG through each wave.
-
+    public int WaveAlterValue = 0; // In charge of modifying basic's bullet spawn RNG and AOE rate of fire through each wave.
+    private int SOECounter = 0;
 
     /* Booleans */
     public bool canShoot = false; // Enemy firing ability
@@ -111,9 +114,18 @@ public class EnemyPhaseManager : MonoBehaviour  // MISSION: 1. FINISH WAVE RNG |
         canTakeDamage = true;
     }
 
-    IEnumerator SpawnWaveText() // Phase text flickering on and off until the next phase happens.
+    IEnumerator VultureEnemy()
     {
-        for (int i = 0; i < 3; i++) // Still, this might mess the game up, just save everything just in case
+        yield return new WaitForSeconds(delayPhaseTime);
+        Instantiate(vultureEnemy, vultureEnemySpawnLocation.position, Quaternion.identity);
+        yield return new WaitForSeconds(delayShootTime);
+        canShoot = true;
+        canTakeDamage = true;
+    }
+
+    IEnumerator SpawnWaveText() // Wave text flickering on and off until the next phase happens.
+    {
+        for (int i = 0; i < 3; i++) 
         {
             yield return new WaitForSeconds(0.25f);
             waveText.gameObject.SetActive(true);
@@ -143,9 +155,12 @@ public class EnemyPhaseManager : MonoBehaviour  // MISSION: 1. FINISH WAVE RNG |
         }
         else
         {
-            normalizeTime = Mathf.MoveTowards(Time.timeScale, 1f, normalizeSpeed * Time.deltaTime);
-            Time.timeScale = normalizeTime;
-            Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            if (!pauseStatus.MenuOpen)
+            {
+                normalizeTime = Mathf.MoveTowards(Time.timeScale, 1f, normalizeSpeed * Time.deltaTime);
+                Time.timeScale = normalizeTime;
+                Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            }
         }
     }
 
@@ -175,7 +190,7 @@ public class EnemyPhaseManager : MonoBehaviour  // MISSION: 1. FINISH WAVE RNG |
                 if (!allowAlterRNG)
                 {
                     allowAlterRNG = true;
-                    WaveRNG++; 
+                    WaveAlterValue++; 
                 }
             }
             else
@@ -229,20 +244,30 @@ public class EnemyPhaseManager : MonoBehaviour  // MISSION: 1. FINISH WAVE RNG |
                         waveTextSpawn = false;
                         newWave = false;
                         canSpawn = false;
-                        StartCoroutine(BasicEnemyGroup());
+                        StartCoroutine(VultureEnemy());
                     }
                     break;
 
                 case 4:
                     if (!canSpawnSOE)
                     {
-                        newWave = false;
-                        canSpawnSOE = true;
-                        StartCoroutine(WaveTextSpawner());
-                        StartCoroutine(SpawnSOE());
-
+                        SOECounter++;
+                        if (SOECounter < 5)
+                        {
+                            newWave = false;
+                            canSpawnSOE = true;
+                            StartCoroutine(WaveTextSpawner());
+                            StartCoroutine(SpawnSOE());
+                        }
+                        else
+                        {
+                            SOECounter = 6;
+                            loopWave = 1;
+                            healthMultiplied++;
+                        }
                     }
                     break;
+
                 case 5:
                     healthMultiplied++; // Increasing the amount of enemy's HP after each wave
                     loopWave = 1;

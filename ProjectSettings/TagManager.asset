@@ -11,6 +11,10 @@ TagManager:
   - EnemyBullet
   - TESTING
   - EnhancedBullet
+  - AoeEnemy
+  - BasicEnemy
+  - HomingEnemy
+  - VultureEnemy
   layers:
   - Default
   - TransparentFX

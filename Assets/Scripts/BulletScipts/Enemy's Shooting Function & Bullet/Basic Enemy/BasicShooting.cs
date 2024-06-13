@@ -63,7 +63,7 @@ public class BasicShooting : MonoBehaviour
         if (!alterRNG)
         {
             alterRNG = true;
-            rngNumber = rngNumber - enemyManage.WaveRNG;  
+            rngNumber = rngNumber - enemyManage.WaveAlterValue;  
         }
 
         if (rngNumber < 10) // Cap maximum RNG amount.

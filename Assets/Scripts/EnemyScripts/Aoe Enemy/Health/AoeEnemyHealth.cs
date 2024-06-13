@@ -69,6 +69,5 @@ public class AoeEnemyHealth : MonoBehaviour
     void IncreaseHealth()
     {
         health = health + (5 * enemyManager.healthMultiplied); // Worked
-        Debug.Log(health);
     }
 }

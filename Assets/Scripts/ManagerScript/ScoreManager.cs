@@ -122,10 +122,10 @@ public class ScoreManager : MonoBehaviour
         UpdateScoreText();
     }
 
-    IEnumerator UpdateScoreTextSmoothly(int newScore) // Called within a basic enemy script. 
+    IEnumerator UpdateScoreTextSmoothly(int newScore) // Called within an enemy script. 
     {
         int oldScore = score;
-        for (int i = oldScore; i <= newScore; i += 5)
+        for (int i = oldScore; i <= newScore; i += 25)
         {
             score = i;
             string stringScore = score.ToString("D14");

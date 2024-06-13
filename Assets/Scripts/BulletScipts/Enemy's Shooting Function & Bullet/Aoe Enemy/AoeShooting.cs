@@ -64,8 +64,13 @@ public class AoeShooting : MonoBehaviour
             }
         }
 
-        timeBetweenShot -= (0.2f * enemyManage.WaveRNG);
-        Debug.Log(timeBetweenShot);
+        IncreaseFireRate();
+
+    }
+
+    void IncreaseFireRate()
+    {
+        timeBetweenShot -= (0.2f * enemyManage.WaveAlterValue);
     }
 
     void Update() 
